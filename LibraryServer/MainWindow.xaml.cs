@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 
 namespace LibraryServer
 {
@@ -60,6 +61,24 @@ namespace LibraryServer
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void SwitchModeButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if(SwitchModeButton.IsChecked==true)
+            {
+                SwitchMode.Content = "Switch to Light Mode";
+                new PaletteHelper().SetLightDark(true);
+            }
+        }
+
+        private void SwitchModeButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (SwitchModeButton.IsChecked == false)
+            {
+                SwitchMode.Content = "Switch to Dark Mode";
+                new PaletteHelper().SetLightDark(false);
+            }
         }
     }
 }

@@ -17,17 +17,17 @@
         <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="2" MouseDown="TitleBar_MouseDown">
             <DockPanel>
                 <StackPanel x:Name="WindowControls" DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,-1,0,0" >
+                    <Label x:Name="SwitchMode" Content="Switch to Light Mode" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="157"/>
+                    <ToggleButton x:Name="SwitchModeButton" Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" Margin="0,0,30,0" Checked="SwitchModeButton_Checked" Unchecked="SwitchModeButton_Unchecked"/>
                     <Button x:Name="WindowStateButton" Click="WindowStateButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
-                        <materialDesign:PackIcon x:Name="WindowStateIcon" Kind="Fullscreen"/>
+                        <materialDesign:PackIcon x:Name="WindowStateIcon" Kind="Fullscreen" Width="Auto" Height="Auto"/>
                     </Button>
                     <Button x:Name="Exit" Click="Exit_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="3,0,0,0">
-                        <materialDesign:PackIcon Kind="ExitToApp"/>
+                        <materialDesign:PackIcon Kind="ExitToApp" Width="Auto" Height="Auto"/>
                     </Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
                     <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
-                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0">Material Design In XAML Toolkit</TextBlock>
-                </StackPanel>
+                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">OOP Library Server</TextBlock>
             </DockPanel>
         </materialDesign:ColorZone>
     </Grid>
