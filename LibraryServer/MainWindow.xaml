@@ -13,6 +13,19 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 
         Title="Library Server" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
+
+    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton,Path=IsChecked}">
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <DockPanel MinWidth="212">
+                <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                              DockPanel.Dock="Top"
+                              HorizontalAlignment="Right" Margin="16"
+                              IsChecked="{Binding ElementName=MenuToggleButton,Path=IsChecked,Mode=TwoWay}"/>
+            </DockPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent>
+
+
+
     <Grid>
         <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
             <DockPanel>
@@ -26,9 +39,10 @@
                         <materialDesign:PackIcon Kind="ExitToApp" Width="Auto" Height="Auto"/>
                     </Button>
                 </StackPanel>
-                    <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                    <ToggleButton x:Name="MenuToggleButton" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False"/>
                     <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">OOP Library Server</TextBlock>
             </DockPanel>
         </materialDesign:ColorZone>
     </Grid>
+    </materialDesign:DrawerHost>
 </Window>
