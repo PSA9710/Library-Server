@@ -41,43 +41,43 @@ namespace LibraryServer
         {
             App.Current.Shutdown();
         }
-        //return to normal mode out of maximized mode
-
+        //switch between maximized and normalized mode
         private void WindowStateButton_Click(object sender, RoutedEventArgs e)
         {
              if(WindowState==WindowState.Normal)
             {
                 WindowState = WindowState.Maximized;
-                WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;
+                WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;  //change icon to fullscreenexit
             }
              else if(WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
-                WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen;
+                WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen; //change icon to fullscreen
             }
         }
-
+        // If the tilebar was clicked, allow drag across the screen
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-
+        // If Switchmode has been checked , switch to dark mode
         private void SwitchModeButton_Checked(object sender, RoutedEventArgs e)
         {
             if(SwitchModeButton.IsChecked==true)
             {
                 SwitchMode.Content = "Switch to Light Mode";
-                new PaletteHelper().SetLightDark(true);
+                new PaletteHelper().SetLightDark(true); //function to switch between light ui and dark ui
             }
         }
 
+        // If Switchmode has been checked , switch to light mode
         private void SwitchModeButton_Unchecked(object sender, RoutedEventArgs e)
         {
             if (SwitchModeButton.IsChecked == false)
             {
                 SwitchMode.Content = "Switch to Dark Mode";
-                new PaletteHelper().SetLightDark(false);
+                new PaletteHelper().SetLightDark(false); //function to switch between light ui and dark ui
             }
         }
     }
