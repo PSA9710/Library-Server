@@ -27,10 +27,10 @@ namespace LibraryServer
         //ovverride statechanged in order to get acces to window-state/style
         protected override void OnStateChanged(EventArgs e)
         {
-            
+
             if (WindowState == WindowState.Maximized)
             {
-                WindowControls.Visibility = Visibility.Visible;
+
                 WindowStyle = WindowStyle.None;
             }
             base.OnStateChanged(e);
@@ -41,11 +41,25 @@ namespace LibraryServer
             App.Current.Shutdown();
         }
         //return to normal mode out of maximized mode
-        private void Normalize_Click(object sender, RoutedEventArgs e)
+
+        private void WindowStateButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Normal;
-            WindowStyle = WindowStyle.SingleBorderWindow;
-            WindowControls.Visibility = Visibility.Hidden;
+             if(WindowState==WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+                WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;
+            }
+             else if(WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+                WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen;
+            }
+        }
+
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

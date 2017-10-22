@@ -12,13 +12,17 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 
-        Title="Library Server" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen">
+        Title="Library Server" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
     <Grid>
-        <materialDesign:ColorZone Mode="PrimaryDark" Padding="16" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="2">
+        <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="2" MouseDown="TitleBar_MouseDown">
             <DockPanel>
-                <StackPanel x:Name="WindowControls" DockPanel.Dock="Right" Orientation="Horizontal" Visibility="Hidden">
-                    <Button x:Name="Normalize" Click="Normalize_Click">Normalize</Button>
-                    <Button x:Name="Exit" Click="Exit_Click">Exit</Button>
+                <StackPanel x:Name="WindowControls" DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,-1,0,0" >
+                    <Button x:Name="WindowStateButton" Click="WindowStateButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                        <materialDesign:PackIcon x:Name="WindowStateIcon" Kind="Fullscreen"/>
+                    </Button>
+                    <Button x:Name="Exit" Click="Exit_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="3,0,0,0">
+                        <materialDesign:PackIcon Kind="ExitToApp"/>
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
