@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="LibraryServer.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryServer"
+             mc:Ignorable="d" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <!-- Adauga cerc pt user -->
+        <!-- Adauga chestii faine, gen cum ai tu la new tab pe chrome-->
+        <StackPanel>
+            <Grid>
+                <Ellipse Height="207" VerticalAlignment="Top" Margin="46,62,47,0" Width="207">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="ProfilePicture" ImageSource="c:\users\test\desktop\1.jpeg" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <materialDesign:PackIcon x:Name="NoProfilePicture" Kind="AccountCircle" Width="250" Height="250" Margin="25,40,25,0" HorizontalAlignment="Stretch"/>
+            </Grid>
+            <Label x:Name="Timer" Content="18:40" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="ExtraBold"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

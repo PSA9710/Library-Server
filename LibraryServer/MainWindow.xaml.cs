@@ -25,6 +25,17 @@ namespace LibraryServer
         {
             InitializeComponent();
         }
+
+        //functie ce updateaza timpul in aplicatie
+        private void TimerTick(Object sender, EventArgs e)
+        {
+            
+        }
+
+
+
+
+
         //ovverride statechanged in order to get acces to window-state/style
         protected override void OnStateChanged(EventArgs e)
         {
@@ -80,5 +91,7 @@ namespace LibraryServer
                 new PaletteHelper().SetLightDark(false); //function to switch between light ui and dark ui
             }
         }
+
+       
     }
 }
