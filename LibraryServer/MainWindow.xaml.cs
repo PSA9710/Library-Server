@@ -26,11 +26,7 @@ namespace LibraryServer
             InitializeComponent();
         }
 
-        //functie ce updateaza timpul in aplicatie
-        private void TimerTick(Object sender, EventArgs e)
-        {
-            
-        }
+        
 
 
 
