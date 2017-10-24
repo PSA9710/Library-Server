@@ -31,7 +31,7 @@
             </StackPanel>
         </StackPanel>
         <materialDesign:Snackbar x:Name="SnackbarMaximumCharacters" HorizontalAlignment="Stretch" VerticalContentAlignment="Bottom">
-            <materialDesign:SnackbarMessage Content="The maximum number of characters is 15" ActionContent="OK"/>
+            <materialDesign:SnackbarMessage Content="The maximum number of characters is 15" ActionContent="OK" ActionClick="SnackbarMessage_ActionClick"/>
         </materialDesign:Snackbar>
     </Grid>
 </UserControl>

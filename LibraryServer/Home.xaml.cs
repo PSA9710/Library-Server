@@ -16,7 +16,10 @@ namespace LibraryServer
             ActualTime.Interval = TimeSpan.FromSeconds(1); //set the interval when the ticks will ocur
             ActualTime.Tick += TimerTick;   //Add TimerTick to fired events
             ActualTime.Start();
+
+            
         }
+
 
         //functie ce updateaza timpul in aplicatie
         private void TimerTick(Object sender, EventArgs e)
@@ -32,6 +35,11 @@ namespace LibraryServer
                 e.Handled = true;
                 SnackbarMaximumCharacters.IsActive = true;
             }
+        }
+
+        private void SnackbarMessage_ActionClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            SnackbarMaximumCharacters.IsActive = false;
         }
     }
 }
