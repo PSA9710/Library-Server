@@ -4,13 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryServer"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" d:DesignWidth="500" Height="574.5">
+
     <Grid >
         <!-- Adauga cerc pt user -->
         <!-- Adauga chestii faine, gen cum ai tu la new tab pe chrome-->
@@ -30,8 +32,6 @@
                 <Label FontSize="48">.</Label>
             </StackPanel>
         </StackPanel>
-        <materialDesign:Snackbar x:Name="SnackbarMaximumCharacters" HorizontalAlignment="Stretch" VerticalContentAlignment="Bottom">
-            <materialDesign:SnackbarMessage Content="The maximum number of characters is 15" ActionContent="OK" ActionClick="SnackbarMessage_ActionClick"/>
-        </materialDesign:Snackbar>
+        <materialDesign:Snackbar x:Name="SnackbarMaximumCharacters" MessageQueue="{materialDesign:MessageQueue}" VerticalContentAlignment="Bottom" />
     </Grid>
 </UserControl>

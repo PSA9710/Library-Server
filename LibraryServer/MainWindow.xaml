@@ -35,7 +35,7 @@
                 <DockPanel>
                     <StackPanel x:Name="WindowControls" DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,-1,0,0" >
                         <Label x:Name="SwitchMode" Content="Switch to Dark Mode" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="157"/>
-                        <ToggleButton x:Name="SwitchModeButton" Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" Margin="0,0,30,0" Checked="SwitchModeButton_Checked" Unchecked="SwitchModeButton_Unchecked" IsChecked="True"/>
+                        <ToggleButton x:Name="SwitchModeButton" Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" Margin="0,0,30,0" Checked="SwitchModeButton_Checked" Unchecked="SwitchModeButton_Unchecked"/>
                         <Button x:Name="WindowStateButton" Click="WindowStateButton_Click" Style="{StaticResource MaterialDesignRaisedAccentButton}">
                             <materialDesign:PackIcon x:Name="WindowStateIcon" Kind="Fullscreen" Width="Auto" Height="Auto"/>
                         </Button>

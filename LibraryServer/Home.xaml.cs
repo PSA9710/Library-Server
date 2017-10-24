@@ -1,5 +1,9 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace LibraryServer
@@ -33,13 +37,15 @@ namespace LibraryServer
             if (TextBoxNameInput.Text.Length == 15)
             {
                 e.Handled = true;
-                SnackbarMaximumCharacters.IsActive = true;
+                //SnackbarMaximumCharacters.IsActive = true;
+                var messageQueue = SnackbarMaximumCharacters.MessageQueue;
+                var message = "Maximum character limit is 15!";
+
+                //find out what this shit does
+                Task.Factory.StartNew(() => messageQueue.Enqueue(message));
             }
         }
 
-        private void SnackbarMessage_ActionClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-            SnackbarMaximumCharacters.IsActive = false;
-        }
+
     }
 }
