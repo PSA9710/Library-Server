@@ -10,14 +10,11 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-
-             d:DesignHeight="5
-             00" d:DesignWidth="500">
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" d:DesignWidth="500" Height="574.5">
     <Grid>
         <!-- Adauga cerc pt user -->
         <!-- Adauga chestii faine, gen cum ai tu la new tab pe chrome-->
-        <StackPanel>
+        <StackPanel >
             <Grid>
                 <Ellipse Height="207" VerticalAlignment="Top" Margin="46,62,47,0" Width="207">
                     <Ellipse.Fill>
@@ -29,9 +26,12 @@
             <Label x:Name="LabelTimer" Content="18:40" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="ExtraBold"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
                 <Label FontSize="48">Good Evening,</Label>
-                <TextBox VerticalContentAlignment="Top" VerticalAlignment="Bottom" Margin="0,0,0,10" FontSize="48" MinWidth="150" Height="56"/>
+                <TextBox x:Name="TextBoxNameInput" VerticalContentAlignment="Top" VerticalAlignment="Bottom" Margin="0,0,0,10" FontSize="48" MinWidth="150" Height="56" PreviewKeyDown="TextBoxNameInput_PreviewKeyDown"/>
                 <Label FontSize="48">.</Label>
             </StackPanel>
         </StackPanel>
+        <materialDesign:Snackbar x:Name="SnackbarMaximumCharacters" HorizontalAlignment="Stretch" VerticalContentAlignment="Bottom">
+            <materialDesign:SnackbarMessage Content="The maximum number of characters is 15" ActionContent="OK"/>
+        </materialDesign:Snackbar>
     </Grid>
 </UserControl>

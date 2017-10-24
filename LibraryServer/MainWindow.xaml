@@ -48,7 +48,8 @@
                 </DockPanel>
             </materialDesign:ColorZone>
             <Grid x:Name="ContentWraper"  Grid.Row="1" >
-                <local:Home />
+                
+                <local:Home Height="Auto" />
             </Grid>
 
         </Grid>

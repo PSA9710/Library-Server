@@ -24,5 +24,14 @@ namespace LibraryServer
             //Set content of Label to current time in a HH:MM format
             LabelTimer.Content = DateTime.Now.ToString("hh:mm");
         }
+
+        private void TextBoxNameInput_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (TextBoxNameInput.Text.Length == 15)
+            {
+                e.Handled = true;
+                SnackbarMaximumCharacters.IsActive = true;
+            }
+        }
     }
 }
