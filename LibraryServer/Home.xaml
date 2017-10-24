@@ -11,17 +11,17 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" d:DesignWidth="500" Height="574.5">
-    <Grid>
+    <Grid >
         <!-- Adauga cerc pt user -->
         <!-- Adauga chestii faine, gen cum ai tu la new tab pe chrome-->
-        <StackPanel >
+        <StackPanel Margin="0,100,0,0" >
             <Grid>
-                <Ellipse Height="207" VerticalAlignment="Top" Margin="46,62,47,0" Width="207">
+                <Ellipse Height="207"  Width="207">
                     <Ellipse.Fill>
                         <ImageBrush x:Name="ProfilePicture" ImageSource="c:\users\test\desktop\1.jpeg" />
                     </Ellipse.Fill>
                 </Ellipse>
-                <materialDesign:PackIcon x:Name="NoProfilePicture" Kind="AccountCircle" Width="250" Height="250" Margin="25,40,25,0" HorizontalAlignment="Stretch"/>
+                <materialDesign:PackIcon x:Name="NoProfilePicture" Kind="AccountCircle" Width="250" Height="250" HorizontalAlignment="Stretch" />
             </Grid>
             <Label x:Name="LabelTimer" Content="18:40" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="ExtraBold"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >

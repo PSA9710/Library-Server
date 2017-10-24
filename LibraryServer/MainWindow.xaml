@@ -49,7 +49,7 @@
             </materialDesign:ColorZone>
             <Grid x:Name="ContentWraper"  Grid.Row="1" >
                 
-                <local:Home Height="Auto" />
+                <local:Home Height="Auto"  />
             </Grid>
 
         </Grid>

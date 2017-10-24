@@ -25,7 +25,7 @@ namespace LibraryServer
         private void TimerTick(Object sender, EventArgs e)
         {
             //Set content of Label to current time in a HH:MM format
-            LabelTimer.Content = DateTime.Now.ToString("hh:mm");
+            LabelTimer.Content = DateTime.Now.ToString("hh:mm tt");
         }
 
         private void TextBoxNameInput_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
