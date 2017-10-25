@@ -17,7 +17,7 @@ namespace LibraryServer
     {
         #region Local_Variables
         int MaximumTextCharacters = 15;//the amount of characters a user is allowed to input
-#endregion
+        #endregion
 
 
 
@@ -30,15 +30,16 @@ namespace LibraryServer
             ActualTime.Tick += TimerTick;   //Add TimerTick to fired events
             ActualTime.Start();
 
-            
+
         }
 
         private void LabelTextChangeRelatedToTime()
-        { int time = DateTime.Parse(DateTime.Now.ToString("HHtt")).Hour;
+        {
+            int time = DateTime.Parse(DateTime.Now.ToString("HHtt")).Hour;
             if (time < 12) LabelGreeting.Content = "Good Morning,";
             else if (time < 17) LabelGreeting.Content = "Good Afternoon,";
             else if (time < 24) LabelGreeting.Content = "Good Evening,";
-            
+
         }
 
         //functie ce updateaza timpul in aplicatie
@@ -53,10 +54,10 @@ namespace LibraryServer
         {
             //SnackbarMaximumCharacters.IsActive = true;
             var messageQueue = SnackbarMaximumCharacters.MessageQueue;
-            var message = "Maximum character limit is " + MaximumTextCharacters.ToString() + "!";
+
 
             //find out what this shit does
-            Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+            Task.Factory.StartNew(() => messageQueue.Enqueue(s));
         }
 
         private void TextBoxNameInput_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -68,16 +69,36 @@ namespace LibraryServer
                     e.Key == System.Windows.Input.Key.Back ||
                     e.Key == System.Windows.Input.Key.Left ||
                     e.Key == System.Windows.Input.Key.Right ||
-                    e.Key==System.Windows.Input.Key.A && Keyboard.Modifiers==ModifierKeys.Control)
-                    )
+                    e.Key == System.Windows.Input.Key.A && Keyboard.Modifiers == ModifierKeys.Control ||
+                    e.Key == Key.V && Keyboard.Modifiers == ModifierKeys.Control ||
+                    e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Control ||
+                    e.Key == Key.X && Keyboard.Modifiers == ModifierKeys.Control ||
+                    e.Key == Key.End || e.Key == Key.Home
+                    ))
                 {
                     e.Handled = true;
-                    var message = "Maximum character limit is "+MaximumTextCharacters.ToString()+"!";
+                    var message = "Maximum character limit is " + MaximumTextCharacters.ToString() + "!";
                     SnackbarMessageDisplay(message);
                 }
             }
+            if (e.Key == Key.Enter)
+            {
+                if (TextBoxNameInput.Text == "")
+                {
+                    SnackbarMessageDisplay("A username is required in order to login"); e.Handled = true;
+                }
+
+            }
         }
-
-
+        // if text(has changed& has more than the maximumtextcharacters, reset and display message
+        private void TextBoxNameInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TextBoxNameInput.Text.Length > MaximumTextCharacters)
+            {
+                TextBoxNameInput.Text = "";
+                var message = "Maximum character limit is " + MaximumTextCharacters.ToString() + "! The name you tried to enter exceeds the allowed limit!";
+                SnackbarMessageDisplay(message);
+            }
+        }
     }
 }
