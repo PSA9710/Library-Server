@@ -2,10 +2,12 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+
 
 namespace LibraryServer
 {
@@ -85,9 +87,12 @@ namespace LibraryServer
             {
                 if (TextBoxNameInput.Text == "")
                 {
-                    SnackbarMessageDisplay("A username is required in order to login"); e.Handled = true;
+                    SnackbarMessageDisplay("A username is required in order to login");
+                    e.Handled = true;
                 }
-
+                //fire the clickbutton in order to pop DialogBox;
+                DialogHostLogIn.IsOpen = true;
+                //B/*uttonRaiseDialog.Command.Execute(ButtonRaiseDialog.CommandParameter);*/
             }
         }
         // if text(has changed& has more than the maximumtextcharacters, reset and display message

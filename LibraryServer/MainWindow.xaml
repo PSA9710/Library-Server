@@ -31,6 +31,11 @@
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="107*"/>
             </Grid.RowDefinitions>
+            <Grid x:Name="ContentWraper" Grid.RowSpan="2">
+                <!--.Row="1" -->
+
+                <local:Home Height="Auto"  />
+            </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>
                     <StackPanel x:Name="WindowControls" DockPanel.Dock="Right" Orientation="Horizontal" Margin="0,-1,0,0" >
@@ -44,13 +49,9 @@
                         </Button>
                     </StackPanel>
                     <ToggleButton x:Name="MenuToggleButton" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False"/>
-                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">OOP Library Server</TextBlock>
+                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center"><Run Text="OOP Library Server"/></TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
-            <Grid x:Name="ContentWraper"  Grid.Row="1" >
-                
-                <local:Home Height="Auto"  />
-            </Grid>
 
         </Grid>
     </materialDesign:DrawerHost>
