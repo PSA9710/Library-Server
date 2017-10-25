@@ -16,6 +16,7 @@ namespace LibraryServer
         public Home()
         {
             InitializeComponent();
+            LabelTextChangeRelatedToTime();
             DispatcherTimer ActualTime = new DispatcherTimer();
             ActualTime.Interval = TimeSpan.FromSeconds(1); //set the interval when the ticks will ocur
             ActualTime.Tick += TimerTick;   //Add TimerTick to fired events
@@ -24,6 +25,13 @@ namespace LibraryServer
             
         }
 
+        private void LabelTextChangeRelatedToTime()
+        { int time = DateTime.Parse(DateTime.Now.ToString("HHtt")).Hour;
+            if (time < 12) LabelGreeting.Content = "Good Morning,";
+            else if (time < 17) LabelGreeting.Content = "Good Afternoon,";
+            else if (time < 24) LabelGreeting.Content = "Good Evening,";
+            
+        }
 
         //functie ce updateaza timpul in aplicatie
         private void TimerTick(Object sender, EventArgs e)
@@ -36,13 +44,21 @@ namespace LibraryServer
         {
             if (TextBoxNameInput.Text.Length == 15)
             {
-                e.Handled = true;
-                //SnackbarMaximumCharacters.IsActive = true;
-                var messageQueue = SnackbarMaximumCharacters.MessageQueue;
-                var message = "Maximum character limit is 15!";
+                //if one of the following keys is pressed, ignore the event
+                if (!(e.Key == System.Windows.Input.Key.Delete ||
+                    e.Key == System.Windows.Input.Key.Back ||
+                    e.Key == System.Windows.Input.Key.Left ||
+                    e.Key == System.Windows.Input.Key.Right)
+                    )
+                {
+                    e.Handled = true;
+                    //SnackbarMaximumCharacters.IsActive = true;
+                    var messageQueue = SnackbarMaximumCharacters.MessageQueue;
+                    var message = "Maximum character limit is 15!";
 
-                //find out what this shit does
-                Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+                    //find out what this shit does
+                    Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+                }
             }
         }
 
