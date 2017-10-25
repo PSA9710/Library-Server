@@ -3,16 +3,24 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace LibraryServer
 {
+
     /// <summary>
     /// Interaction logic for Home.xaml
     /// </summary>
     public partial class Home : UserControl
     {
+        #region Local_Variables
+        int MaximumTextCharacters = 15;//the amount of characters a user is allowed to input
+#endregion
+
+
+
         public Home()
         {
             InitializeComponent();
@@ -37,27 +45,35 @@ namespace LibraryServer
         private void TimerTick(Object sender, EventArgs e)
         {
             //Set content of Label to current time in a HH:MM format
-            LabelTimer.Content = DateTime.Now.ToString("hh:mm tt");
+            LabelTimer.Content = DateTime.Now.ToString("HH:mm");
+        }
+
+        //Recieves a string, and pops a snackbarnotification with the recieved string
+        private void SnackbarMessageDisplay(string s)
+        {
+            //SnackbarMaximumCharacters.IsActive = true;
+            var messageQueue = SnackbarMaximumCharacters.MessageQueue;
+            var message = "Maximum character limit is " + MaximumTextCharacters.ToString() + "!";
+
+            //find out what this shit does
+            Task.Factory.StartNew(() => messageQueue.Enqueue(message));
         }
 
         private void TextBoxNameInput_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (TextBoxNameInput.Text.Length == 15)
+            if (TextBoxNameInput.Text.Length == MaximumTextCharacters)
             {
                 //if one of the following keys is pressed, ignore the event
                 if (!(e.Key == System.Windows.Input.Key.Delete ||
                     e.Key == System.Windows.Input.Key.Back ||
                     e.Key == System.Windows.Input.Key.Left ||
-                    e.Key == System.Windows.Input.Key.Right)
+                    e.Key == System.Windows.Input.Key.Right ||
+                    e.Key==System.Windows.Input.Key.A && Keyboard.Modifiers==ModifierKeys.Control)
                     )
                 {
                     e.Handled = true;
-                    //SnackbarMaximumCharacters.IsActive = true;
-                    var messageQueue = SnackbarMaximumCharacters.MessageQueue;
-                    var message = "Maximum character limit is 15!";
-
-                    //find out what this shit does
-                    Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+                    var message = "Maximum character limit is "+MaximumTextCharacters.ToString()+"!";
+                    SnackbarMessageDisplay(message);
                 }
             }
         }
