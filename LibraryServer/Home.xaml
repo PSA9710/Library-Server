@@ -16,14 +16,14 @@
     
         <materialDesign:DialogHost x:Name="DialogHostLogIn" IsOpen="False" DialogOpened="DialogHostLogIn_DialogOpened" DialogClosing="DialogHostLogIn_DialogClosing">
         <materialDesign:DialogHost.DialogContent>
-            <Grid Margin="25,25">
-                
-                <StackPanel FocusManager.FocusedElement="{Binding ElementName=PasswordBoxUserPassword}">
-                    <TextBox x:Name="TextBoxUserName" materialDesign:HintAssist.Hint="Forname" Margin="10,10"
+            <Grid >
+                <StackPanel >
+                    <StackPanel FocusManager.FocusedElement="{Binding ElementName=PasswordBoxUserPassword}" Margin="10,5,10,10">
+                    <TextBox x:Name="TextBoxUserName" materialDesign:HintAssist.Hint="Forname" Margin="10,5"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" PreviewKeyDown="TextBoxUserName_PreviewKeyDown"/>
                     <PasswordBox x:Name="PasswordBoxUserPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
-                                 materialDesign:HintAssist.Hint="CNP" Margin="10,10" PreviewKeyDown="PasswordBoxUserPassword_PreviewKeyDown"/>
-                    <StackPanel Orientation="Horizontal" Margin="25,10,25,0">
+                                 materialDesign:HintAssist.Hint="CNP" Margin="10,5,10,10" PreviewKeyDown="PasswordBoxUserPassword_PreviewKeyDown" MaxLength="13"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Button x:Name="ButtonAcceptDialogHost" Style="{StaticResource MaterialDesignRaisedAccentButton}"
                                 materialDesign:RippleAssist.Feedback="#DD000000"
                                  Command="materialDesign:DialogHost.CloseDialogCommand" Click="ButtonAcceptDialogHost_Click"
@@ -33,6 +33,7 @@
                     </StackPanel>
                 </StackPanel>
                 <materialDesign:Snackbar x:Name="SnackbarDialogHost" VerticalContentAlignment="Bottom" IsTabStop="False" />
+                </StackPanel>
             </Grid>
         </materialDesign:DialogHost.DialogContent>
             <Grid>
@@ -67,7 +68,6 @@
                 <Label FontSize="48">.</Label>
             </StackPanel>
         </StackPanel>
-            <Label x:Name="lbl" VerticalAlignment="Bottom" Content="AN A are mere"/>
             <materialDesign:Snackbar x:Name="SnackbarMaximumCharacters" VerticalContentAlignment="Bottom" MaxWidth="600" />
     </Grid>
     </materialDesign:DialogHost>
