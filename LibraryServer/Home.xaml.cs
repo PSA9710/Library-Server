@@ -1,5 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -54,6 +55,7 @@ namespace LibraryServer
             tickCount++;
         }
         #endregion
+
         #region SnackBarDisplays
         //Recieves a string and time to display, and pops a snackbarnotification with the recieved string, and time of displayment
 
@@ -97,6 +99,7 @@ namespace LibraryServer
 
         }
         #endregion
+
         #region HOME_UI
         #region TextBoxNameInput
         private void TextBoxNameInput_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -138,7 +141,9 @@ namespace LibraryServer
 
 
         #endregion
+
         #region DialogHost
+
         #region DialogHost_FiredEvents
         //when DialogHostLogIn is opened, execute the following code
         private void DialogHostLogIn_DialogOpened(object sender, DialogOpenedEventArgs eventArgs)
@@ -162,11 +167,15 @@ namespace LibraryServer
                 var message = "\"Cancel\" was pressed by the user";
                 SnackbarMessageDisplay(message, 2000);
             }
+
+            PasswordBoxUserPassword.Password = "";//resets password content 
+            TextBoxUserName.Text = "";//resets name content
             AcceptButtonIsPressed = false; //make sure it's false, whatever it happens
         }
 
 
         #endregion
+
         #region DialogHost_Content
         private void ButtonAcceptDialogHost_Click(object sender, RoutedEventArgs e)
         {
@@ -177,7 +186,9 @@ namespace LibraryServer
             }
             else
             {
-
+                var message = "CNP can not be empty!";
+                SnackBarDialogHostMessageDisplay(message, 1000);
+                e.Handled = true;
             }
 
         }
@@ -191,7 +202,7 @@ namespace LibraryServer
 
         private void TextBoxUserName_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (TextBoxUserName.Text.Length > MaximumTextCharacters)
+            if (TextBoxUserName.Text.Length == MaximumTextCharacters)
             {
                 if (!GetPressedKey(e))
                 {
@@ -221,7 +232,17 @@ namespace LibraryServer
 
 
         }
+
+        private void PasswordBoxUserPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBoxUserPassword.Password.Length < 13) return;
+            if (PasswordBoxUserPassword.Password == "") return;
+            string testString;
+            testString = PasswordBoxUserPassword.Password;
+            if (testString.All(char.IsDigit)) MessageBox.Show("IsDigit");
+        }
         #endregion
+
         #endregion
 
         #region ExtraFunctions
@@ -250,7 +271,9 @@ namespace LibraryServer
                     ) return true;
             return false;
         }
-#endregion
 
+        #endregion
+
+       
     }
 }

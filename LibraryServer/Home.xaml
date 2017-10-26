@@ -20,9 +20,9 @@
                 <StackPanel >
                     <StackPanel FocusManager.FocusedElement="{Binding ElementName=PasswordBoxUserPassword}" Margin="10,5,10,10">
                     <TextBox x:Name="TextBoxUserName" materialDesign:HintAssist.Hint="Forname" Margin="10,5"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" PreviewKeyDown="TextBoxUserName_PreviewKeyDown"/>
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" PreviewKeyDown="TextBoxUserName_PreviewKeyDown" MaxLength="15"/>
                     <PasswordBox x:Name="PasswordBoxUserPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
-                                 materialDesign:HintAssist.Hint="CNP" Margin="10,5,10,10" PreviewKeyDown="PasswordBoxUserPassword_PreviewKeyDown" MaxLength="13"/>
+                                 materialDesign:HintAssist.Hint="CNP" Margin="10,5,10,10" PreviewKeyDown="PasswordBoxUserPassword_PreviewKeyDown" MaxLength="13" PasswordChanged="PasswordBoxUserPassword_PasswordChanged"/>
                     <StackPanel Orientation="Horizontal" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Button x:Name="ButtonAcceptDialogHost" Style="{StaticResource MaterialDesignRaisedAccentButton}"
                                 materialDesign:RippleAssist.Feedback="#DD000000"
