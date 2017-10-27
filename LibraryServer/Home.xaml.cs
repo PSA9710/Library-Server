@@ -118,8 +118,9 @@ namespace LibraryServer
             {
                 if (TextBoxNameInput.Text == "")
                 {
-                    SnackbarMessageDisplay("A username is required in order to login", 1500);
+                    SnackbarMessageDisplay("Your Forname is required in order to login", 1500);
                     e.Handled = true;
+                    return;
                 }
                 //fire the clickbutton in order to pop DialogBox;
                 DialogHostLogIn.IsOpen = true;
@@ -178,7 +179,13 @@ namespace LibraryServer
 
         #region DialogHost_Content
         private void ButtonAcceptDialogHost_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+            if(TextBoxUserName.Text=="")
+            {
+                var message = "Name required to login!";
+                SnackBarDialogHostMessageDisplay(message, 1000);
+            }
+
             if (PasswordBoxUserPassword.Password != "")
             {
                 if (PasswordBoxUserPassword.Password.Length < 13)
