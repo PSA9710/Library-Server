@@ -162,7 +162,7 @@ namespace LibraryServer
             if (AcceptButtonIsPressed)
             {
                 LogInSuccessfull(AcceptButtonIsPressed, TextBoxUserName.Text);
-                var message = "Succesfully logged in!";
+                var message = "Succesfully logged in! Welcome "+TextBoxUserName.Text +"!";
                 SnackbarMessageDisplay(message, 2000);
             }
             else
@@ -186,7 +186,7 @@ namespace LibraryServer
         {
             LabelName.Visibility = Visibility.Collapsed;
             TextBoxNameInput.Visibility = Visibility.Visible;
-            TextBoxNameInput.Text = "";
+            TextBoxNameInput.Text = LabelName.Content.ToString();
         }
 
         private void ButtonAcceptDialogHost_Click(object sender, RoutedEventArgs e)
@@ -243,7 +243,12 @@ namespace LibraryServer
         }
 
         private void PasswordBoxUserPassword_PreviewKeyDown(object sender, KeyEventArgs e)
-        {   
+        {   if (e.Key == Key.Enter)
+            {
+                ButtonAcceptDialogHost.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                e.Handled = true;
+                return;
+            }
             if (PasswordBoxUserPassword.Password.Length == 13)
             {
                 if (GetPressedKey(e)) return;
@@ -258,7 +263,7 @@ namespace LibraryServer
                 SnackBarDialogHostMessageDisplay(message, 1000);
 
             }
-
+            
 
         }
 
@@ -303,7 +308,7 @@ namespace LibraryServer
                     e.Key == Key.Home && Keyboard.Modifiers == ModifierKeys.Shift) ||
                     e.Key == Key.Tab ||
                     e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl ||
-                    e.Key == Key.LeftShift || e.Key == Key.RightShift
+                    e.Key == Key.LeftShift || e.Key == Key.RightShift||e.Key==Key.Enter
                     ) return true;
             return false;
         }
