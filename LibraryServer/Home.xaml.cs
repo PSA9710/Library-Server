@@ -181,8 +181,19 @@ namespace LibraryServer
         {
             if (PasswordBoxUserPassword.Password != "")
             {
-                AcceptButtonIsPressed = true;
-                ButtonAcceptDialogHost.Command.Execute(null);
+                if (PasswordBoxUserPassword.Password.Length < 13)
+                {
+                    var message = "Password is too short!";
+                    SnackBarDialogHostMessageDisplay(message, 1000);
+                    PasswordBoxUserPassword.Focus();
+                    e.Handled = true;
+                }
+                else
+                {
+                    AcceptButtonIsPressed = true;
+                    BUTTONCLOSEDIALOG.Command.Execute(null);
+                    e.Handled = true;
+                }
             }
             else
             {
@@ -196,7 +207,7 @@ namespace LibraryServer
         private void ButtonCancelDialogHost_Click(object sender, RoutedEventArgs e)
         {
             AcceptButtonIsPressed = false;
-            ButtonCancelDialogHost.Command.Execute(null);
+            BUTTONCLOSEDIALOG.Command.Execute(null);
 
         }
 
@@ -235,11 +246,18 @@ namespace LibraryServer
 
         private void PasswordBoxUserPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (PasswordBoxUserPassword.Password.Length < 13) return;
+            
             if (PasswordBoxUserPassword.Password == "") return;
             string testString;
             testString = PasswordBoxUserPassword.Password;
-            if (testString.All(char.IsDigit)) MessageBox.Show("IsDigit");
+            //if password contains characters reset password, and send error notification
+            if (!testString.All(char.IsDigit))
+            {
+                var message = "Only numbers are allowed";
+                SnackBarDialogHostMessageDisplay(message, 1000);
+                PasswordBoxUserPassword.Password = "";
+            }
+            if (PasswordBoxUserPassword.Password.Length < 13) return;
         }
         #endregion
 
