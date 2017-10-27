@@ -30,11 +30,13 @@ namespace LibraryServer
         {
             InitializeComponent();
             LabelTextChangeRelatedToTime();
+
             DispatcherTimer ActualTime = new DispatcherTimer();
             ActualTime.Interval = TimeSpan.FromSeconds(1); //set the interval when the ticks will ocur
             ActualTime.Tick += TimerTick;   //Add TimerTick to fired events
             ActualTime.Start();
 
+            ChangeNameLabelColour(false);
 
         }
         #region Time_Related_Methods
@@ -159,6 +161,7 @@ namespace LibraryServer
             //if the AcceptButton was pressed, do the folowing else do the other
             if (AcceptButtonIsPressed)
             {
+                LogInSuccessfull(AcceptButtonIsPressed, TextBoxUserName.Text);
                 var message = "Succesfully logged in!";
                 SnackbarMessageDisplay(message, 2000);
             }
@@ -178,6 +181,14 @@ namespace LibraryServer
         #endregion
 
         #region DialogHost_Content
+
+        private void LabelName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            LabelName.Visibility = Visibility.Collapsed;
+            TextBoxNameInput.Visibility = Visibility.Visible;
+            TextBoxNameInput.Text = "";
+        }
+
         private void ButtonAcceptDialogHost_Click(object sender, RoutedEventArgs e)
         {   
             if(TextBoxUserName.Text=="")
@@ -296,9 +307,42 @@ namespace LibraryServer
                     ) return true;
             return false;
         }
+        /// <summary>
+        /// If the Login attempt was succesful this function changes the window changes
+        /// e.g Textbox transforms into LABEL
+        /// </summary>
+        /// <param name="loginResult">
+        /// If true switches the textbox with a label
+        /// </param>
+        /// <param name="Name">Name is the name with which the user logged in</param>
+        private void LogInSuccessfull(bool loginResult,string Name)
+        {
+            if (loginResult)
+            {
+                LabelName.Content = Name;
+                LabelName.Visibility = Visibility.Visible;
+                TextBoxNameInput.Visibility = Visibility.Collapsed;
+            }
+        }
+        /// <summary>
+        /// Sets the color of the LabelName according to the selected Mode
+        /// </summary>
+        /// <param name="isDark">if true, is Dark Mode</param>
+        public void ChangeNameLabelColour(bool isDark)
+        {
+            
+            if (isDark)
+            {
+                Application.Current.Resources["SwitchAccentPrimary"] = FindResource("SecondaryAccentBrush");
+            }
+            else
+            {
+                Application.Current.Resources["SwitchAccentPrimary"] = FindResource("PrimaryHueMidBrush");
+            }
+        }
 
         #endregion
 
-       
+        
     }
 }

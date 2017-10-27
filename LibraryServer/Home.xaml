@@ -13,8 +13,7 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" d:DesignWidth="600" Height="574.5">
 
-    
-        <materialDesign:DialogHost x:Name="DialogHostLogIn" IsOpen="False" DialogOpened="DialogHostLogIn_DialogOpened" DialogClosing="DialogHostLogIn_DialogClosing">
+    <materialDesign:DialogHost x:Name="DialogHostLogIn" IsOpen="False" DialogOpened="DialogHostLogIn_DialogOpened" DialogClosing="DialogHostLogIn_DialogClosing">
         <materialDesign:DialogHost.DialogContent>
             <Grid >
                 <StackPanel >
@@ -28,7 +27,7 @@
                                 materialDesign:RippleAssist.Feedback="#DD000000"
                                   Click="ButtonAcceptDialogHost_Click"
                                 >Sign In</Button>
-                            <Button x:Name="BUTTONCLOSEDIALOG" Command="materialDesign:DialogHost.CloseDialogCommand" Width="0" Height="0"/>
+                            <Button x:Name="BUTTONCLOSEDIALOG" Command="materialDesign:DialogHost.CloseDialogCommand" Width="0" Height="0" IsTabStop="False"/>
                             <Button x:Name="ButtonCancelDialogHost" Margin="20,0,0,0" Click="ButtonCancelDialogHost_Click" 
                                 >Cancel</Button>
                     </StackPanel>
@@ -64,8 +63,9 @@
             </Grid>
             <Label x:Name="LabelTimer" Content="18:40" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="ExtraBold"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Label x:Name="LabelGreeting" FontSize="48">Good Evening,</Label>
-                <TextBox x:Name="TextBoxNameInput" VerticalContentAlignment="Top" VerticalAlignment="Bottom" Margin="0,0,0,10" FontSize="48" MinWidth="150" Height="56" PreviewKeyDown="TextBoxNameInput_PreviewKeyDown" TextChanged="TextBoxNameInput_TextChanged"/>
+                <Label x:Name="LabelGreeting" FontSize="48" Background="{x:Null}" >Good Evening,</Label>
+                    <Label x:Name="LabelName" FontSize="48" HorizontalAlignment="Left" Visibility="Collapsed" Foreground="{DynamicResource SwitchAccentPrimary}" MouseDoubleClick="LabelName_MouseDoubleClick" />
+                    <TextBox x:Name="TextBoxNameInput" VerticalContentAlignment="Top" VerticalAlignment="Bottom" Margin="0,0,0,10" FontSize="48" MinWidth="150" Height="56" PreviewKeyDown="TextBoxNameInput_PreviewKeyDown" TextChanged="TextBoxNameInput_TextChanged"/>
                 <Label FontSize="48">.</Label>
             </StackPanel>
         </StackPanel>

@@ -75,6 +75,7 @@ namespace LibraryServer
             {
                 SwitchMode.Content = "Switch to Light Mode";
                 new PaletteHelper().SetLightDark(true); //function to switch between light ui and dark ui
+                new Home().ChangeNameLabelColour(true);
             }
         }
 
@@ -85,6 +86,7 @@ namespace LibraryServer
             {
                 SwitchMode.Content = "Switch to Dark Mode";
                 new PaletteHelper().SetLightDark(false); //function to switch between light ui and dark ui
+                new Home().ChangeNameLabelColour(false);
             }
         }
 
