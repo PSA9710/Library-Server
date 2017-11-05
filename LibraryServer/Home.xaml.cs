@@ -1,6 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -84,20 +86,20 @@ namespace LibraryServer
         }
 
         private void SnackBarDialogHostMessageDisplay(string s, int _timeSpan)
-        {  
-            if (tickCount < 1 + _timeSpan/1000) return;
-            
-
-                //var message = "Maximum character  ce  is " + MaximumTextCharacters.ToString() + "!";
-                //var messageQueue = SnackbarDialogHost.MessageQueue;
-                ////find out what this shit does
-                //Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+        {
+            if (tickCount < 1 + _timeSpan / 1000) return;
 
 
-                var messageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(_timeSpan));
-                SnackbarDialogHost.MessageQueue = messageQueue;
-                SnackbarDialogHost.MessageQueue.Enqueue(s);
-                tickCount = 0;
+            //var message = "Maximum character  ce  is " + MaximumTextCharacters.ToString() + "!";
+            //var messageQueue = SnackbarDialogHost.MessageQueue;
+            ////find out what this shit does
+            //Task.Factory.StartNew(() => messageQueue.Enqueue(message));
+
+
+            var messageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(_timeSpan));
+            SnackbarDialogHost.MessageQueue = messageQueue;
+            SnackbarDialogHost.MessageQueue.Enqueue(s);
+            tickCount = 0;
 
         }
         #endregion
@@ -162,7 +164,7 @@ namespace LibraryServer
             if (AcceptButtonIsPressed)
             {
                 LogInSuccessfull(AcceptButtonIsPressed, TextBoxUserName.Text);
-                var message = "Succesfully logged in! Welcome "+TextBoxUserName.Text +"!";
+                var message = "Succesfully logged in! Welcome " + TextBoxUserName.Text + "!";
                 SnackbarMessageDisplay(message, 2000);
             }
             else
@@ -190,8 +192,8 @@ namespace LibraryServer
         }
 
         private void ButtonAcceptDialogHost_Click(object sender, RoutedEventArgs e)
-        {   
-            if(TextBoxUserName.Text=="")
+        {
+            if (TextBoxUserName.Text == "")
             {
                 var message = "Name required to login!";
                 SnackBarDialogHostMessageDisplay(message, 1000);
@@ -209,6 +211,17 @@ namespace LibraryServer
                 else
                 {
                     AcceptButtonIsPressed = true;
+                    //if userLogin fails
+                    if (!SQL_Connect())
+                    {
+                        var message = "User does not exist!";
+                        SnackBarDialogHostMessageDisplay(message, 1000);
+                        PasswordBoxUserPassword.Password = "";
+                        TextBoxUserName.Text = "";
+                        TextBoxUserName.Focus();
+                        return;
+                    }
+
                     BUTTONCLOSEDIALOG.Command.Execute(null);
                     e.Handled = true;
                 }
@@ -243,7 +256,8 @@ namespace LibraryServer
         }
 
         private void PasswordBoxUserPassword_PreviewKeyDown(object sender, KeyEventArgs e)
-        {   if (e.Key == Key.Enter)
+        {
+            if (e.Key == Key.Enter)
             {
                 ButtonAcceptDialogHost.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 e.Handled = true;
@@ -263,13 +277,13 @@ namespace LibraryServer
                 SnackBarDialogHostMessageDisplay(message, 1000);
 
             }
-            
+
 
         }
 
         private void PasswordBoxUserPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            
+
             if (PasswordBoxUserPassword.Password == "") return;
             string testString;
             testString = PasswordBoxUserPassword.Password;
@@ -308,7 +322,7 @@ namespace LibraryServer
                     e.Key == Key.Home && Keyboard.Modifiers == ModifierKeys.Shift) ||
                     e.Key == Key.Tab ||
                     e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl ||
-                    e.Key == Key.LeftShift || e.Key == Key.RightShift||e.Key==Key.Enter
+                    e.Key == Key.LeftShift || e.Key == Key.RightShift || e.Key == Key.Enter
                     ) return true;
             return false;
         }
@@ -320,7 +334,7 @@ namespace LibraryServer
         /// If true switches the textbox with a label
         /// </param>
         /// <param name="Name">Name is the name with which the user logged in</param>
-        private void LogInSuccessfull(bool loginResult,string Name)
+        private void LogInSuccessfull(bool loginResult, string Name)
         {
             if (loginResult)
             {
@@ -335,7 +349,7 @@ namespace LibraryServer
         /// <param name="isDark">if true, is Dark Mode</param>
         public void ChangeNameLabelColour(bool isDark)
         {
-            
+
             if (isDark)
             {
                 Application.Current.Resources["SwitchAccentPrimary"] = FindResource("SecondaryAccentBrush");
@@ -348,6 +362,56 @@ namespace LibraryServer
 
         #endregion
 
-        
+        #region SQL_CONNECT
+        /// <summary>
+        /// Connect to the SQL_database for user login
+        /// </summary>
+        private bool SQL_Connect()
+        {
+            try
+            {
+                Console.WriteLine("Connecting to SQL SERVER");
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "localhost";
+                builder.UserID = "Library";
+                builder.Password = "1234";
+                builder.InitialCatalog = "Library";
+
+                Console.WriteLine("Conecting to SQL server.....");
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    Console.WriteLine("Connection Succesfull");
+
+                    Console.WriteLine("Attempting LogIN");
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("SELECT COUNT(*) from Students where Prenume = @nume AND CNP=@cnp");
+                    String sql = sb.ToString();
+
+                    //check if user exists
+                    using (SqlCommand sql_command = new SqlCommand(sql, connection))
+                    {
+                        sql_command.Parameters.AddWithValue("@nume", TextBoxUserName.ToString());
+                        sql_command.Parameters.AddWithValue("@cnp", PasswordBoxUserPassword.Password.ToString());
+                        int userCount = (int)sql_command.ExecuteScalar();
+                        if (userCount == 0)
+                        {
+                            Console.WriteLine("LogIn failed! User does not exist! \nReseting Values...."); return false;
+                        }
+                    }
+
+                    //if user exists LOGIN
+                    sb.Clear();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return false;
+        }
+        #endregion
+
     }
 }

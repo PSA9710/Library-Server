@@ -23,7 +23,7 @@
                         <PasswordBox x:Name="PasswordBoxUserPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
                                  materialDesign:HintAssist.Hint="CNP" Margin="10,5,10,10" PreviewKeyDown="PasswordBoxUserPassword_PreviewKeyDown" MaxLength="13" PasswordChanged="PasswordBoxUserPassword_PasswordChanged"/>
                         <Grid Margin="10,5,10,10">
-                            <ComboBox  materialDesign:ComboBoxAssist.ClassicMode="false">
+                            <ComboBox x:Name="ComboBoxRank"  materialDesign:ComboBoxAssist.ClassicMode="false">
                                 <ComboBoxItem IsSelected="True">Student</ComboBoxItem>
                                 <ComboBoxItem>Elev</ComboBoxItem>
                                 <ComboBoxItem>Librarian</ComboBoxItem>
