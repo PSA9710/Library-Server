@@ -11,12 +11,6 @@ namespace LibraryServer
         public String Name { get; private set; }
         public String LastName { get; private set; }
 
-        Person(String name,String Lastname)
-        {
-            Name = name;
-            LastName = Lastname;
-        }
-
         public void setName(String name)
         {
             Name = name;

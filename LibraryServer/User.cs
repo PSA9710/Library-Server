@@ -10,9 +10,11 @@ namespace LibraryServer
     {
         public bool isTeacher { get; private set; }
 
-        User(String Name,String Prenume,bool isteacher):base(Name,Prenume)
+        User(String Nume,String Prenume,bool isteacher)
         {
             isTeacher = isteacher;
+            setLastName(Nume);
+            setName(Prenume);
         }
 
 
