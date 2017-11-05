@@ -21,6 +21,9 @@ namespace LibraryServer
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        static User AppUser;
+
         public MainWindow()
         {
             InitializeComponent();

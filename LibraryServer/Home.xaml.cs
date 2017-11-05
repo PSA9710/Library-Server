@@ -9,6 +9,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 
@@ -210,7 +211,7 @@ namespace LibraryServer
                 }
                 else
                 {
-                    AcceptButtonIsPressed = true;
+
                     //if userLogin fails
                     if (!SQL_Connect())
                     {
@@ -221,7 +222,8 @@ namespace LibraryServer
                         TextBoxUserName.Focus();
                         return;
                     }
-
+                    Console.WriteLine("Closing Dialog Host");
+                    AcceptButtonIsPressed = true;
                     BUTTONCLOSEDIALOG.Command.Execute(null);
                     e.Handled = true;
                 }
@@ -385,13 +387,15 @@ namespace LibraryServer
 
                     Console.WriteLine("Attempting LogIN");
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("SELECT COUNT(*) from Students where Prenume = @nume AND CNP=@cnp");
+                    sb.Append("SELECT COUNT(*) from " + ComboBoxRank.SelectionBoxItem.ToString() + "s where Prenume = @nume AND CNP=@cnp;");
                     String sql = sb.ToString();
+
+
 
                     //check if user exists
                     using (SqlCommand sql_command = new SqlCommand(sql, connection))
                     {
-                        sql_command.Parameters.AddWithValue("@nume", TextBoxUserName.ToString());
+                        sql_command.Parameters.AddWithValue("@nume", TextBoxUserName.Text.ToString());
                         sql_command.Parameters.AddWithValue("@cnp", PasswordBoxUserPassword.Password.ToString());
                         int userCount = (int)sql_command.ExecuteScalar();
                         if (userCount == 0)
@@ -399,10 +403,30 @@ namespace LibraryServer
                             Console.WriteLine("LogIn failed! User does not exist! \nReseting Values...."); return false;
                         }
                     }
-
+                    Console.WriteLine("User found");
                     //if user exists LOGIN
                     sb.Clear();
-
+                    sb.Append("SELECT Profilepic from " + ComboBoxRank.SelectionBoxItem.ToString() + "s where Prenume = @nume AND CNP=@cnp;");
+                    sql = sb.ToString();
+                    //retrieve profilePicture
+                    using (SqlCommand sql_command = new SqlCommand(sql, connection))
+                    {
+                        sql_command.Parameters.AddWithValue("@nume", TextBoxUserName.Text.ToString());
+                        sql_command.Parameters.AddWithValue("@cnp", PasswordBoxUserPassword.Password.ToString());
+                        using (SqlDataReader reader = sql_command.ExecuteReader())
+                        {       //nu merge tui ceapa lui
+                            if (reader.Read())
+                            {
+                                if (reader["Profilepic"] != null)
+                                {
+                                    Console.WriteLine("Changing profile picture");
+                                    ProfilePicture.ImageSource = new BitmapImage(new Uri(reader.GetString(reader.GetOrdinal("Profilepic")), UriKind.Absolute));
+                                    NoProfilePicture.Visibility = Visibility.Hidden;
+                                }
+                            }
+                        }
+                    }
+                    return true;
                 }
             }
             catch (SqlException ex)
