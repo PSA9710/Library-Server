@@ -18,25 +18,32 @@
             <Grid >
                 <StackPanel >
                     <StackPanel FocusManager.FocusedElement="{Binding ElementName=PasswordBoxUserPassword}" Margin="10,5,10,10">
-                    <TextBox x:Name="TextBoxUserName" materialDesign:HintAssist.Hint="Forname" Margin="10,5"
+                        <TextBox x:Name="TextBoxUserName" materialDesign:HintAssist.Hint="Forname" Margin="10,5"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" PreviewKeyDown="TextBoxUserName_PreviewKeyDown" MaxLength="15"/>
-                    <PasswordBox x:Name="PasswordBoxUserPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                        <PasswordBox x:Name="PasswordBoxUserPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
                                  materialDesign:HintAssist.Hint="CNP" Margin="10,5,10,10" PreviewKeyDown="PasswordBoxUserPassword_PreviewKeyDown" MaxLength="13" PasswordChanged="PasswordBoxUserPassword_PasswordChanged"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button x:Name="ButtonAcceptDialogHost" Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        <Grid Margin="10,5,10,10">
+                            <ComboBox  materialDesign:ComboBoxAssist.ClassicMode="false">
+                                <ComboBoxItem IsSelected="True">Student</ComboBoxItem>
+                                <ComboBoxItem>Elev</ComboBoxItem>
+                                <ComboBoxItem>Librarian</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button x:Name="ButtonAcceptDialogHost" Style="{StaticResource MaterialDesignRaisedAccentButton}"
                                 materialDesign:RippleAssist.Feedback="#DD000000"
                                   Click="ButtonAcceptDialogHost_Click"
                                 >Sign In</Button>
                             <Button x:Name="BUTTONCLOSEDIALOG" Command="materialDesign:DialogHost.CloseDialogCommand" Width="0" Height="0" IsTabStop="False"/>
                             <Button x:Name="ButtonCancelDialogHost" Margin="20,0,0,0" Click="ButtonCancelDialogHost_Click" 
                                 >Cancel</Button>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-                <materialDesign:Snackbar x:Name="SnackbarDialogHost" VerticalContentAlignment="Bottom" IsTabStop="False" />
+                    <materialDesign:Snackbar x:Name="SnackbarDialogHost" VerticalContentAlignment="Bottom" IsTabStop="False" />
                 </StackPanel>
             </Grid>
         </materialDesign:DialogHost.DialogContent>
-            <Grid>
+        <Grid>
             <!--Button that triggers the DialogHost-->
             <!--<Button x:Name="ButtonRaiseDialog" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Width="0" Height="0" >
                 <Button.CommandParameter>
@@ -48,28 +55,28 @@
                 TEST
                 afadfaafdddddddddd
             </Button>-->
-            
-        
-        <!-- Adauga cerc pt user -->
-        <!-- Adauga chestii faine, gen cum ai tu la new tab pe chrome-->
-        <StackPanel VerticalAlignment="Center" >
-            <Grid>
-                <Ellipse Height="207"  Width="207">
-                    <Ellipse.Fill>
-                        <ImageBrush x:Name="ProfilePicture" ImageSource="/LibraryServer;component/Resources/1.jpeg" />
-                    </Ellipse.Fill>
-                </Ellipse>
-                <materialDesign:PackIcon x:Name="NoProfilePicture" Kind="AccountCircle" Width="250" Height="250" HorizontalAlignment="Stretch" />
-            </Grid>
-            <Label x:Name="LabelTimer" Content="18:40" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="ExtraBold"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Label x:Name="LabelGreeting" FontSize="48" Background="{x:Null}" >Good Evening,</Label>
+
+
+            <!-- Adauga cerc pt user -->
+            <!-- Adauga chestii faine, gen cum ai tu la new tab pe chrome-->
+            <StackPanel VerticalAlignment="Center" >
+                <Grid>
+                    <Ellipse Height="207"  Width="207">
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="ProfilePicture" ImageSource="/LibraryServer;component/Resources/1.jpeg" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <materialDesign:PackIcon x:Name="NoProfilePicture" Kind="AccountCircle" Width="250" Height="250" HorizontalAlignment="Stretch" />
+                </Grid>
+                <Label x:Name="LabelTimer" Content="18:40" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="72" FontWeight="ExtraBold"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <Label x:Name="LabelGreeting" FontSize="48" Background="{x:Null}" >Good Evening,</Label>
                     <Label x:Name="LabelName" FontSize="48" HorizontalAlignment="Left" Visibility="Collapsed" Foreground="{DynamicResource SwitchAccentPrimary}" MouseDoubleClick="LabelName_MouseDoubleClick" />
                     <TextBox x:Name="TextBoxNameInput" VerticalContentAlignment="Top" VerticalAlignment="Bottom" Margin="0,0,0,10" FontSize="48" MinWidth="100" Height="56" PreviewKeyDown="TextBoxNameInput_PreviewKeyDown" TextChanged="TextBoxNameInput_TextChanged"/>
-                <Label FontSize="48">.</Label>
+                    <Label FontSize="48">.</Label>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
             <materialDesign:Snackbar x:Name="SnackbarMaximumCharacters" VerticalContentAlignment="Bottom" MaxWidth="600" />
-    </Grid>
+        </Grid>
     </materialDesign:DialogHost>
 </UserControl>
