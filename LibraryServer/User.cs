@@ -10,6 +10,19 @@ namespace LibraryServer
     {
         public bool isTeacher { get; private set; }
 
+        User(String Name,String Prenume,bool isteacher):base(Name,Prenume)
+        {
+            isTeacher = isteacher;
+        }
+
+
+
+
+        public void setTeacher(bool isteacher)
+        {
+            isTeacher = isteacher;
+        }
+
         public override void AddBooks()
         {
             throw new NotImplementedException();
