@@ -8,5 +8,12 @@ namespace LibraryServer
 {
     abstract class Person
     {
+        public String Name { get; private set; }
+        public String LastName { get; private set; }
+
+
+        public abstract void AddBooks();
+        public abstract void RemoveBooks();
+
     }
 }
