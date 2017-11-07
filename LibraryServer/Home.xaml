@@ -63,7 +63,7 @@
                 <Grid>
                     <Ellipse Height="207"  Width="207">
                         <Ellipse.Fill>
-                            <ImageBrush x:Name="ProfilePicture" ImageSource="/LibraryServer;component/Resources/1.jpeg" />
+                            <ImageBrush x:Name="ProfilePicture" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <materialDesign:PackIcon x:Name="NoProfilePicture" Kind="AccountCircle" Width="250" Height="250" HorizontalAlignment="Stretch" />
