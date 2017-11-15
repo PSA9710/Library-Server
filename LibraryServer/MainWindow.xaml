@@ -34,7 +34,8 @@
             <Grid x:Name="ContentWraper" Grid.RowSpan="2">
                 <!--.Row="1" -->
 
-                <local:Home Height="Auto"  />
+                <local:Home Height="Auto"  Visibility="Hidden"/>
+                <local:BOOKS Visibility="Visible"/>
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>

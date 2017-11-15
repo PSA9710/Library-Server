@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using System.Windows.Threading;
 
 namespace LibraryServer
 {
@@ -23,15 +24,28 @@ namespace LibraryServer
     {
 
         static User AppUser;
+        static public int tickCount;
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeTimer();
         }
 
         
 
-
+        private void InitializeTimer()
+        {
+            DispatcherTimer ActualTime = new DispatcherTimer();
+            ActualTime.Interval = TimeSpan.FromSeconds(1); //set the interval when the ticks will ocur
+            ActualTime.Tick += TimerTick;   //Add TimerTick to fired events
+            ActualTime.Start();
+        }
+        
+        private void TimerTick(object sender, EventArgs e)
+        {
+            tickCount++;
+        }
 
 
 

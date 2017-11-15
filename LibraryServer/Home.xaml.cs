@@ -308,7 +308,7 @@ namespace LibraryServer
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        private bool GetPressedKey(KeyEventArgs e)
+        public bool GetPressedKey(KeyEventArgs e)
         {
             if (
                     e.Key == System.Windows.Input.Key.Delete ||
