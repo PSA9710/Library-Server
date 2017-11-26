@@ -21,11 +21,19 @@ namespace LibraryServer
     /// </summary>
     public partial class BOOKS : UserControl
     {
+
+        Book book;
+
         public BOOKS()
         {
             InitializeComponent();
             for (int i = 1; i < 11; i++)
                 ComboBoxCopies.Items.Add(i);
+        }
+
+        private void PopulateBook()
+        {
+            
         }
 
         #region SnackBar
@@ -188,6 +196,7 @@ namespace LibraryServer
                 if(EntryFound)
                 {
                     ButtonSave.Content = "Save";
+                    PopulateBook();
                 }
                 else
                 {
