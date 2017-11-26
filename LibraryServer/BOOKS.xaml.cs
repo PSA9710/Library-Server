@@ -92,7 +92,9 @@ namespace LibraryServer
         #endregion
 
         #region SQL_Functions
-
+        /// <summary>
+        /// Variable that stores if a book is in the database
+        /// </summary>
         private bool EntryFound = false;
 
 
@@ -182,10 +184,37 @@ namespace LibraryServer
                         }
                     }
                 }
+
+                if(EntryFound)
+                {
+                    ButtonSave.Content = "Save";
+                }
+                else
+                {
+                    ButtonSave.Content = "ADD";
+                }
             }
         }
+
+        /// <summary>
+        /// Modifies a entry in the database
+        /// </summary>
+        private void SQL_BOOK_modify()
+        {
+
+        }
+
         #endregion
 
-        
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            if(EntryFound)
+
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
