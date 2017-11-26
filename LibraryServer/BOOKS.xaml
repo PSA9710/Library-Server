@@ -24,15 +24,18 @@
             <TextBox x:Name="TextBoxPublisher" materialDesign:HintAssist.Hint="Publisher" 
 				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
             <ComboBox materialDesign:HintAssist.Hint="No of Copies:"
-                x:Name="ComboBoxCopies" HorizontalAlignment="Center"/>
-            <TextBox TextWrapping="Wrap" VerticalAlignment="Stretch" 
+                x:Name="ComboBoxCopies" HorizontalAlignment="Center" />
+            <TextBox x:Name="TextBoxDescription" TextWrapping="Wrap" VerticalAlignment="Stretch" 
                  MaxWidth="300"
 				 AcceptsReturn="True"                 
 				 VerticalScrollBarVisibility="Auto"
 				 SpellCheck.IsEnabled="True"
 				 materialDesign:HintAssist.Hint="Multiline text"
 				 Height="40" Margin="0,100,0,0">Multiline.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The quick brown fox jumps over the lazy dog. War and peace. Keep going. Go on. For how long? Not long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</TextBox>
-
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="ButtonSave">Save</Button>
+                <Button x:Name="ButtonCancel">Cancel</Button>
+            </StackPanel>
         </StackPanel>
         <materialDesign:Snackbar x:Name="SnackbarDisplay" VerticalContentAlignment="Bottom" MaxWidth="600" />
     </Grid>

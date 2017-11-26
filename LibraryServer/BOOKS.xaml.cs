@@ -93,6 +93,9 @@ namespace LibraryServer
 
         #region SQL_Functions
 
+        private bool EntryFound = false;
+
+
         private String SQL_ConnectionString()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -105,17 +108,20 @@ namespace LibraryServer
             return builder.ConnectionString;
         }
 
-
+        /// <summary>
+        /// Search in the database for book after ISBN
+        /// </summary>
         private void SQL_ISBN_Search()
         {
+            int idA=-1, idP=-1;
             using (SqlConnection con = new SqlConnection(SQL_ConnectionString()))
             {
                 con.Open();
-                Console.WriteLine("Connection Succesful...Attempting ISBN query for "+ TextBoxISBN.Text.ToString());
+                Console.WriteLine("Connection Succesful...Attempting ISBN query for " + TextBoxISBN.Text.ToString());
 
 
                 StringBuilder sb = new StringBuilder();
-                sb.Append("select * from Books where ISBN="+TextBoxISBN.Text.ToString());
+                sb.Append("select * from Books where ISBN=" + TextBoxISBN.Text.ToString());
                 String sql = sb.ToString();
 
 
@@ -123,13 +129,59 @@ namespace LibraryServer
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if(reader.Read())
+                        if (reader.Read())
                         {//populare ca lumea
+                            Console.WriteLine("Entry found...populating");
+                            EntryFound = true;
                             TextBoxBookName.Text = reader["book_name"] as string;
+                            int i = reader.GetInt32(reader.GetOrdinal("no_of_copies"));
+                            ComboBoxCopies.SelectedIndex = i - 1;
+                            TextBoxDescription.Text = reader["description"] as string;
+                            idA = reader.GetInt32(reader.GetOrdinal("author_ID"));
+                            idP = reader.GetInt32(reader.GetOrdinal("publisher_ID"));
                         }
                     }
                 }
-            
+                if (idA !=-1 && idP!=-1)
+                {
+                    Console.WriteLine("Initializing querry for Author");
+                    sb.Clear();
+                    sb.Append("select * from Authors where author_ID=" + idA.ToString());
+                    sql = sb.ToString();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string a, b;
+                                a = reader["first_Name"] as string;
+                                b = reader["last_Name"] as string;
+                                MessageBox.Show(a + b);
+                                TextBoxAuthor.Text = a + " " + b;
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("Initializing querry for Publisher");
+                    sb.Clear();
+                    sb.Append("select * from Publishers where publisher_ID=" + idP.ToString());
+                    sql = sb.ToString();
+
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string a;
+                                a = reader["Name"] as string;
+                                TextBoxPublisher.Text = a ;
+                            }
+                        }
+                    }
+                }
             }
         }
         #endregion
