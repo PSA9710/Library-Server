@@ -213,7 +213,7 @@ namespace LibraryServer
                 }
             }
         }
-        
+
 
         private void SQL_RegisterAuthor()
         {
@@ -225,7 +225,7 @@ namespace LibraryServer
 
                 con.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("insert into Authors (first_Name,last_Name) values ('"+names[0]+"','"+names[1]+"');");
+                sb.Append("insert into Authors (first_Name,last_Name) values ('" + names[0] + "','" + names[1] + "');");
                 String sql = sb.ToString();
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
@@ -262,7 +262,7 @@ namespace LibraryServer
 
             using (SqlConnection con = new SqlConnection(SQL_ConnectionString()))
             {
-               
+
                 con.Open();
                 StringBuilder sb = new StringBuilder();
                 sb.Append("select author_ID from Authors where first_Name=@first and last_Name=@last");
@@ -273,7 +273,7 @@ namespace LibraryServer
                     cmd.Parameters.AddWithValue("@last", names[1]);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if(reader.Read())
+                        if (reader.Read())
                         {
                             id = reader.GetInt32(0);
                             MessageBox.Show(id.ToString());
@@ -282,7 +282,7 @@ namespace LibraryServer
                 }
                 con.Close();
             }
-            if(id==-1)
+            if (id == -1)
             {
                 SQL_RegisterAuthor();
                 return -9;
@@ -319,7 +319,24 @@ namespace LibraryServer
                 con.Open();
                 Console.WriteLine("Creating SQL Querry for Book Update");
 
-
+                StringBuilder sb = new StringBuilder();
+                sb.Append("update Books set " +
+                    "book_name='" + TextBoxBookName.Text + "'," +
+                    "author_ID=" + aID.ToString() + "," +
+                    "publisher_ID=" + pID.ToString() + "," +
+                    "no_of_copies=" + ComboBoxCopies.SelectedValue.ToString() + "," +
+                    "description='" + TextBoxDescription.Text + "'" +
+                    "where ISBN=" + TextBoxISBN.Text + ";"
+                    );
+                String sql = sb.ToString();
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch { MessageBox.Show("Error while updating"); }
+                }
 
             }
         }
@@ -332,7 +349,7 @@ namespace LibraryServer
 
                 con.Open();
                 StringBuilder sb = new StringBuilder();
-                sb.Append("insert into Publishers (Name) values ('" + TextBoxPublisher.Text+ "');");
+                sb.Append("insert into Publishers (Name) values ('" + TextBoxPublisher.Text + "');");
                 String sql = sb.ToString();
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
@@ -388,17 +405,64 @@ namespace LibraryServer
             return id;
         }
 
-
-            #endregion
-
-            private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        private void SQL_BOOK_insert()
         {
-            if(EntryFound)
+
+            int aID = -1, pID = -1;
+            //if (TextBoxAuthor.Text != book.Author)
+            {
+                Console.WriteLine("Author  , attempting to get new ID");
+                aID = SQL_GetAuthorID();
+                if (aID == -9)
+                    aID = SQL_GetAuthorID();
+            }
+            //if (TextBoxPublisher.Text != book.Publisher)
+            {
+                Console.WriteLine("Publisher , attemtping to get new PublisherID");
+                pID = SQL_GetPublisherID();
+                if (pID == -9)
+                    pID = SQL_GetPublisherID();
+            }
+            if (aID == -1 || pID == -1) return;
+
+            using (SqlConnection con = new SqlConnection(SQL_ConnectionString()))
+            {
+                con.Open();
+                Console.WriteLine("Creating SQL Querry for Book insert");
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("insert into Books (ISBN,book_name,author_ID,publisher_ID,no_of_copies,description)" +
+                    " values('" + TextBoxISBN.Text + "','" + TextBoxBookName.Text + "'," + aID.ToString() + "," + pID.ToString()
+                    + "," + ComboBoxCopies.SelectedValue.ToString() + ",'" + TextBoxDescription.Text + "');");
+
+                String sql = sb.ToString();
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch { MessageBox.Show("Error while attempting to insert"); }
+                }
+
+            }
+        }
+
+
+        #endregion
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (EntryFound)
             {
                 Console.WriteLine("Modifing entry in the table for ISBN " + TextBoxISBN.Text);
                 SQL_BOOK_modify();
             }
-            else { }
+            else
+            {
+                Console.WriteLine("Inserting new entry in the table with ISBN " + TextBoxISBN.Text);
+                SQL_BOOK_insert();
+            }
 
         }
 
