@@ -374,9 +374,9 @@ namespace LibraryServer
             {
                 Console.WriteLine("Connecting to SQL SERVER");
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost";
+                builder.DataSource = "tcp:libraryoop.database.windows.net,1433";
                 builder.UserID = "Library";
-                builder.Password = "1234";
+                builder.Password = "Aa123456789";
                 builder.InitialCatalog = "Library";
 
                 Console.WriteLine("Conecting to SQL server.....");
