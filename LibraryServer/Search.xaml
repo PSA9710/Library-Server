@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="LibraryServer.Search"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryServer"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+             d:DesignHeight="574" d:DesignWidth="600">
+    <Grid >
+        <materialDesign:ColorZone Width="Auto" Height="Auto" materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                  Mode="Light" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{DynamicResource MaterialDesignToolButton}" Height="Auto" Width="30" >
+                    <materialDesign:PackIcon Kind="Magnify" Opacity="1" Width="20" Height="20"  />
+                </Button>
+                <TextBox Grid.Column="1" 
+                         materialDesign:HintAssist.Hint="Search for books after book name, author or publisher..."
+                         VerticalAlignment="Center" VerticalContentAlignment="Center"
+                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"/>
+                <ComboBox materialDesign:HintAssist.Hint="Genre:" Grid.Column="2" 
+                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                          BorderThickness="0"
+                x:Name="ComboBoxGenre" VerticalContentAlignment="Center" Margin="15,0,0,0" >
+                    <ComboBoxItem>SF</ComboBoxItem>
+                    <ComboBoxItem>Horror</ComboBoxItem>
+                    <ComboBoxItem>Action</ComboBoxItem>
+                    <ComboBoxItem>Drama</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+        </materialDesign:ColorZone>
+    </Grid>
+</UserControl>

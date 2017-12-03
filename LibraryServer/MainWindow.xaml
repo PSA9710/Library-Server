@@ -31,11 +31,12 @@
                 <RowDefinition Height="13*"/>
                 <RowDefinition Height="107*"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="ContentWraper" Grid.RowSpan="2">
+            <Grid x:Name="ContentWraper" Grid.Row="1">
                 <!--.Row="1" -->
 
-                <local:Home Height="Auto"  Visibility="Hidden"/>
+                <local:Home Height="Auto"  Visibility="Visible"/>
                 <local:BOOKS Visibility="Visible"/>
+                <local:Search Visibility="Visible" />
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>
