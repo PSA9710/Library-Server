@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace LibraryServer
 {
     /// <summary>
-    /// Interaction logic for Search.xaml
+    /// Interaction logic for BookCard.xaml
     /// </summary>
-    public partial class Search : UserControl
+    public partial class BookCard : UserControl
     {
-        public Search()
+        public BookCard()
         {
             InitializeComponent();
         }
-
-       
     }
 }

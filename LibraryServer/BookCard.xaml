@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="LibraryServer.BookCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryServer"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        >
+    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth5">
+        <Grid Background="#FFFFA404">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Image Grid.Column="0" Width="50" Height="50" Source="C:\Users\psa97\Downloads\rick_and_morty-peace_among_worlds-(1243).jpg" Stretch="UniformToFill" Visibility="Hidden"/>
+            <materialDesign:PackIcon Kind="BookOpenPageVariant" Grid.Column="0" Width="145" Height="195" Margin="5" />
+            <Grid Grid.Column="1" Width="200">
+                <StackPanel HorizontalAlignment="Right">
+                    <TextBlock x:Name="TextBlockBookTitle" Style="{StaticResource MaterialDesignTitleTextBlock}" FontSize="24">Ana are mere mihai are pere</TextBlock>
+                    <TextBlock x:Name="TextBlockAuthor" Style="{StaticResource MaterialDesignHeadlineTextBlock}" FontSize="6" HorizontalAlignment="Right">written By Mihai Luca</TextBlock>
+                </StackPanel>
+                <Button Content="Find out more..." Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Grid>
+    </materialDesign:Card>
+</UserControl>

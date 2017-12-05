@@ -14,7 +14,11 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
              d:DesignHeight="574" d:DesignWidth="600">
     <Grid >
-        <materialDesign:ColorZone Width="Auto" Height="Auto" materialDesign:ShadowAssist.ShadowDepth="Depth4"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Width="Auto" Height="Auto" materialDesign:ShadowAssist.ShadowDepth="Depth4" Grid.Row="0"
                                   Mode="Light" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" VerticalAlignment="Top" >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -40,5 +44,7 @@
                 </ComboBox>
             </Grid>
         </materialDesign:ColorZone>
+
+        <local:BookCard Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"   />
     </Grid>
 </UserControl>

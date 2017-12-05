@@ -76,6 +76,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Book.cs" />
+    <Compile Include="BookCard.xaml.cs">
+      <DependentUpon>BookCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BOOKS.xaml.cs">
       <DependentUpon>BOOKS.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Page Include="BookCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BOOKS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
