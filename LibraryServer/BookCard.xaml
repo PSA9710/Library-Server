@@ -19,15 +19,21 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            <Image Grid.Column="0" Width="50" Height="50" Source="C:\Users\psa97\Downloads\rick_and_morty-peace_among_worlds-(1243).jpg" Stretch="UniformToFill" Visibility="Hidden"/>
+
+            <Image Grid.Column="0" Width="155" Height="205" Source="https://s.hswstatic.com/gif/2017-Chevrolet-Corvette-Grand-Sport.jpg" Stretch="Fill" Visibility="Visible"/>
             <materialDesign:PackIcon Kind="BookOpenPageVariant" Grid.Column="0" Width="145" Height="195" Margin="5" />
             <Grid Grid.Column="1" Width="200">
-                <StackPanel HorizontalAlignment="Right">
-                    <TextBlock x:Name="TextBlockBookTitle" Style="{StaticResource MaterialDesignTitleTextBlock}" FontSize="24">Ana are mere mihai are pere</TextBlock>
-                    <TextBlock x:Name="TextBlockAuthor" Style="{StaticResource MaterialDesignHeadlineTextBlock}" FontSize="6" HorizontalAlignment="Right">written By Mihai Luca</TextBlock>
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Margin="10,5,10,0">
+                        <TextBlock x:Name="TextBlockBookTitle" Style="{StaticResource MaterialDesignTitleTextBlock}" FontSize="24" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Ana are mere mihai are pere</TextBlock>
+                        <TextBlock x:Name="TextBlockAuthor" Style="{StaticResource MaterialDesignHeadlineTextBlock}" FontSize="15" HorizontalAlignment="Right" Margin="0,-5,0,0" FontWeight="Medium">written By Mihai Luca</TextBlock>
+                        <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Hidden" MaxHeight="126" Padding="10,22,10,10">
+                            <TextBlock x:Name="TextBlockDescription" Style="{StaticResource MaterialDesignBody1TextBlock}"  TextWrapping="Wrap"  TextAlignment="Justify" ScrollViewer.HorizontalScrollBarVisibility="Auto" Text="    Ana are mere dece are ana mere si mihai nu are mere pentru ca da si pentru ca nu si pentru ca maicuta donmnului sa nu te lase singurel laa......Greu Si asa au mers pana la adanci batraneti pentru ca da si pentru ca nu si siperafasofjdagfajgajlkjaglkj" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center"   />
+                        </ScrollViewer>
+                    </StackPanel>
+                    <Rectangle Height="0.2"/>
+                    <Button Content="Find out more..." Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom" />
                 </StackPanel>
-                <Button Content="Find out more..." Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom"/>
             </Grid>
         </Grid>
     </materialDesign:Card>
