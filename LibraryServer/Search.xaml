@@ -30,7 +30,7 @@
                 <Button Style="{DynamicResource MaterialDesignToolButton}" Height="Auto" Width="30" >
                     <materialDesign:PackIcon Kind="Magnify" Opacity="1" Width="20" Height="20"  />
                 </Button>
-                <TextBox Grid.Column="1" 
+                <TextBox x:Name="TextBoxSearch" Grid.Column="1" 
                          materialDesign:HintAssist.Hint="Search for books after book name, author or publisher..."
                          VerticalAlignment="Center" VerticalContentAlignment="Center"
                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"/>
@@ -43,7 +43,7 @@
                     <ComboBoxItem>Action</ComboBoxItem>
                     <ComboBoxItem>Drama</ComboBoxItem>
                 </ComboBox>
-                <Button Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Margin="5,0,0,0">
+                <Button Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Margin="5,0,0,0" Click="Button_Click">
                     <materialDesign:PackIcon Kind="Send" />
                 </Button>
             </Grid>

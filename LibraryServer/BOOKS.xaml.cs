@@ -113,8 +113,11 @@ namespace LibraryServer
         /// </summary>
         private bool EntryFound = false;
 
-
-        private String SQL_ConnectionString()
+/// <summary>
+/// generates the strinc necessary for the connection to the database
+/// </summary>
+/// <returns></returns>
+        public String SQL_ConnectionString()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "tcp:libraryoop.database.windows.net,1433";
