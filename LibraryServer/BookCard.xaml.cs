@@ -36,5 +36,10 @@ namespace LibraryServer
             TextBlockAuthor.Text = "written by " + book.Author;
             TextBlockDescription.Text = "   " + book.Description;
         }
+
+        private void ButtonFindOutMore_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this.Name.ToString());
+        }
     }
 }

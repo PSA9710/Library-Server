@@ -35,7 +35,8 @@ namespace LibraryServer
                 e.Handled = true;
                 return;
             }
-            SQL_Querry();
+            SpawnCard();
+           // SQL_Querry();
         }
 
         private void SQL_Querry()
@@ -49,6 +50,20 @@ namespace LibraryServer
                 sb.Append("select * from Books where ");
             }
 
+        }
+        BookCard bk;
+        /// <summary>
+        /// Represents the amount of cards it has to spawn //helpfull for identyfing the object
+        /// </summary>
+        static int numberOfCard = 1;
+        private void SpawnCard()
+        {
+            bk = new BookCard();
+            Console.WriteLine("Inserting new Card...");
+            bk.Name = "BookCard" + numberOfCard.ToString();
+            numberOfCard++;
+            bk.Margin = new Thickness(20);
+            WrapPanelDisplayCards.Children.Add(bk);
         }
     }
 }

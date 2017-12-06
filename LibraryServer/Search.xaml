@@ -48,7 +48,8 @@
                 </Button>
             </Grid>
         </materialDesign:ColorZone>
-
-        <local:BookCard Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"   />
+        <ScrollViewer Grid.Row="1" Padding="10">
+            <WrapPanel x:Name="WrapPanelDisplayCards" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </ScrollViewer>
     </Grid>
 </UserControl>
