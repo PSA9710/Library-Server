@@ -20,9 +20,21 @@ namespace LibraryServer
     /// </summary>
     public partial class BookCard : UserControl
     {
+
+        Book book;
+
         public BookCard()
         {
             InitializeComponent();
+        }
+
+        public BookCard(Book b)
+        {
+            book = b;
+            InitializeComponent();
+            TextBlockBookTitle.Text = book.BookName;
+            TextBlockAuthor.Text = "written by " + book.Author;
+            TextBlockDescription.Text = "   " + book.Description;
         }
     }
 }
