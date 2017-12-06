@@ -65,5 +65,19 @@ namespace LibraryServer
             bk.Margin = new Thickness(20);
             WrapPanelDisplayCards.Children.Add(bk);
         }
+
+        private void TextBoxSearch_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key==Key.Enter)
+            {
+                if(TextBoxSearch.Text=="")
+                {
+                    Console.WriteLine("Enter was pressed, but search text box is null.....aborting....");
+                    e.Handled = true;
+                    return;
+                }
+                Button_Click(new object(), new RoutedEventArgs());
+            }
+        }
     }
 }

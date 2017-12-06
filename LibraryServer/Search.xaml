@@ -33,7 +33,7 @@
                 <TextBox x:Name="TextBoxSearch" Grid.Column="1" 
                          materialDesign:HintAssist.Hint="Search for books after book name, author or publisher..."
                          VerticalAlignment="Center" VerticalContentAlignment="Center"
-                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"/>
+                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" PreviewKeyDown="TextBoxSearch_PreviewKeyDown"/>
                 <ComboBox materialDesign:HintAssist.Hint="Genre:" Grid.Column="2" 
                           materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                           BorderThickness="0"
@@ -43,12 +43,12 @@
                     <ComboBoxItem>Action</ComboBoxItem>
                     <ComboBoxItem>Drama</ComboBoxItem>
                 </ComboBox>
-                <Button Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Margin="5,0,0,0" Click="Button_Click">
+                <Button x:Name="ButtonSearch" Grid.Column="3" Style="{StaticResource MaterialDesignFlatButton}" Margin="5,0,0,0" Click="Button_Click">
                     <materialDesign:PackIcon Kind="Send" />
                 </Button>
             </Grid>
         </materialDesign:ColorZone>
-        <ScrollViewer Grid.Row="1" Padding="10">
+        <ScrollViewer x:Name="ScrollViewerDisplayCards" Grid.Row="1" Margin="10"  Padding="10">
             <WrapPanel x:Name="WrapPanelDisplayCards" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </ScrollViewer>
     </Grid>

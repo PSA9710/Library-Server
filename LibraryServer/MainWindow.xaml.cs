@@ -71,11 +71,13 @@ namespace LibraryServer
              if(WindowState==WindowState.Normal)
             {
                 WindowState = WindowState.Maximized;
+                UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0,0,8,10);
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;  //change icon to fullscreenexit
             }
              else if(WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
+                UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0);
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen; //change icon to fullscreen
             }
         }

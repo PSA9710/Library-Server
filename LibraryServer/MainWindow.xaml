@@ -35,8 +35,8 @@
                 <!--.Row="1" -->
 
                 <local:Home Height="Auto"  Visibility="Visible"/>
-                <local:BOOKS Visibility="Visible"/>
-                <local:Search Visibility="Visible" />
+                <local:BOOKS Visibility="Hidden"/>
+                <local:Search x:Name="UISearch" Visibility="Visible" />
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>
