@@ -15,6 +15,11 @@ namespace LibraryServer
         public int No_Copies { get; private set; }
         public String Description { get; private set; }
 
+        public Book()
+        {
+
+        }
+
         public Book(string isbn, string Name, string author, string publisher, string copies, string description)
         {
             ISBN = Convert.ToInt32(isbn);
