@@ -35,7 +35,7 @@ namespace LibraryServer
                 e.Handled = true;
                 return;
             }
-            SpawnCard();
+            //SpawnCard();
             SQL_Querry();
         }
 
@@ -73,7 +73,7 @@ namespace LibraryServer
         /// <returns>Returns the Publisher as a string</returns>
         private String SQL_GetPublisher(int i)
         {
-
+            return "idiot";
         }
         /// <summary>
         /// Search the DB for entries that have author or publisher or bookname in it
@@ -107,6 +107,7 @@ namespace LibraryServer
                             String NoCopies = reader.GetInt32(reader.GetOrdinal("no_of_copies")).ToString();
                             bk = new Book(ISBN, name, Author, Publisher, NoCopies, Description);
 
+                            SpawnCard(bk);
                         }
                     }
                     catch(SqlException ex)
@@ -118,19 +119,19 @@ namespace LibraryServer
             }
 
         }
-        BookCard bk;
+        BookCard bk1;
         /// <summary>
         /// Represents the amount of cards it has to spawn //helpfull for identyfing the object
         /// </summary>
         static int numberOfCard = 1;
-        private void SpawnCard()
+        private void SpawnCard(Book bk)
         {
-            bk = new BookCard();
+            bk1 = new BookCard(bk);
             Console.WriteLine("Inserting new Card...");
-            bk.Name = "BookCard" + numberOfCard.ToString();
+            bk1.Name = "BookCard" + numberOfCard.ToString();
             numberOfCard++;
-            bk.Margin = new Thickness(20);
-            WrapPanelDisplayCards.Children.Add(bk);
+            bk1.Margin = new Thickness(20);
+            WrapPanelDisplayCards.Children.Add(bk1);
         }
 
         private void TextBoxSearch_PreviewKeyDown(object sender, KeyEventArgs e)
