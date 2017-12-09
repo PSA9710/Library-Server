@@ -109,6 +109,31 @@ namespace LibraryServer
             }
         }
 
-       
+ 
+        private void ButtonHome_Click(object sender, RoutedEventArgs e)
+        {
+            Home.Visibility = Visibility.Visible;
+            BOOKS.Visibility = Visibility.Hidden;
+            UISearch.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonBooks_Click(object sender, RoutedEventArgs e)
+        {
+            Home.Visibility = Visibility.Hidden;
+            BOOKS.Visibility = Visibility.Visible;
+            UISearch.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Home.Visibility = Visibility.Hidden;
+            BOOKS.Visibility = Visibility.Hidden;
+            UISearch.Visibility = Visibility.Visible;
+        }
+
+        public  void ToggleButtonEnabled()
+        {
+            MenuToggleButton.IsEnabled = !MenuToggleButton.IsEnabled;
+        }
     }
 }

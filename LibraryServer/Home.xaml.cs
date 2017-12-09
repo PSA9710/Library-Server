@@ -343,6 +343,7 @@ namespace LibraryServer
                 LabelName.Content = Name;
                 LabelName.Visibility = Visibility.Visible;
                 TextBoxNameInput.Visibility = Visibility.Collapsed;
+                
             }
         }
         /// <summary>

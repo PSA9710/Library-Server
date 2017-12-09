@@ -17,13 +17,32 @@
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton,Path=IsChecked}">
         <materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel MinWidth="212">
-                <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                <ToggleButton x:Name="ToggleButtonMenu" Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                               DockPanel.Dock="Top"
+                              IsEnabled="False"
                               HorizontalAlignment="Right" Margin="16"
                               IsChecked="{Binding ElementName=MenuToggleButton,Path=IsChecked,Mode=TwoWay}"/>
-                <Button Content="Home"/>
-                <Button Content="Add/Modify Books"/>
-                <Button Content="Search Books"/>
+                <StackPanel>
+                    <Button x:Name="ButtonHome"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonHome_Click">
+                        <StackPanel Orientation="Horizontal" >
+                            <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label>Home</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Label>Search</Label>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="ButtonBooks"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonBooks_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookPlus" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <Label>Add or Modify Books</Label>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -37,9 +56,9 @@
             <Grid x:Name="ContentWraper" Grid.Row="1">
                 <!--.Row="1" -->
 
-                <local:Home Height="Auto"  Visibility="Visible"/>
-                <local:BOOKS Visibility="Hidden"/>
-                <local:Search x:Name="UISearch" Visibility="Visible" />
+                <local:Home x:Name="Home" Height="Auto"  Visibility="Visible"/>
+                <local:BOOKS x:Name="BOOKS" Visibility="Hidden"/>
+                <local:Search x:Name="UISearch" Visibility="Hidden" />
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>
@@ -53,7 +72,7 @@
                             <materialDesign:PackIcon Kind="ExitToApp" Width="Auto" Height="Auto"/>
                         </Button>
                     </StackPanel>
-                    <ToggleButton x:Name="MenuToggleButton" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False"/>
+                    <ToggleButton Name="MenuToggleButton" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False"/>
                     <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center"><Run Text="OOP Library Server"/></TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
