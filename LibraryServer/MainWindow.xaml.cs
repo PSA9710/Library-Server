@@ -30,6 +30,8 @@ namespace LibraryServer
         {
             InitializeComponent();
             InitializeTimer();
+            AppUser = new User();
+            Home.SetUser(AppUser);
         }
 
         

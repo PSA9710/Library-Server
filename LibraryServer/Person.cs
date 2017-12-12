@@ -6,23 +6,36 @@ using System.Threading.Tasks;
 
 namespace LibraryServer
 {
-    abstract class Person
+    public abstract class Person
     {
+        public String CNP { get; private set; }
         public String Name { get; private set; }
         public String LastName { get; private set; }
+        public int AnAbs { get; private set; }
+        public List<int> ReservedBooks { get; private set; }
 
-        public void setName(String name)
+        public void SetName(String name)
         {
             Name = name;
         }
 
-        public void setLastName(String name)
+        public void SetLastName(String name)
         {
             LastName = name;
         }
 
-        public abstract void AddBooks();
-        public abstract void RemoveBooks();
+        public void SetCNP(String cnp)
+        {
+            CNP = cnp;
+        }
+
+        public void SetAnAbs(int i)
+        {
+            AnAbs = i;
+        }
+
+        public abstract void AddBooks(String carti);
+        public abstract void RemoveBooks(int i);
 
     }
 }

@@ -27,7 +27,7 @@ namespace LibraryServer
         int tickCount = 0; //check ticks in order to Call SnacbkarEnque Known ISSUE #738
         #endregion
 
-
+        private User AppUser;
 
         public Home()
         {
@@ -42,6 +42,12 @@ namespace LibraryServer
             ChangeNameLabelColour(false);
 
         }
+
+        public void SetUser(User usr)
+        {
+            AppUser = usr;
+        }
+
         #region Time_Related_Methods
         private void LabelTextChangeRelatedToTime()
         {
@@ -222,9 +228,22 @@ namespace LibraryServer
                         TextBoxUserName.Focus();
                         return;
                     }
+
+                    if (AppUser.AnAbs > DateTime.Now.Year && !AppUser.isTeacher)
+                    {
+                        var message = "User is no more a Student";
+                        SnackBarDialogHostMessageDisplay(message, 1000);
+                        PasswordBoxUserPassword.Password = "";
+                        TextBoxUserName.Text = "";
+                        TextBoxUserName.Focus();
+                        return;
+                    }
+
                     Console.WriteLine("Closing Dialog Host");
                     AcceptButtonIsPressed = true;
                     BUTTONCLOSEDIALOG.Command.Execute(null);
+                    var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
+                    target.MenuToggleButton.IsEnabled = true;
                     e.Handled = true;
                 }
             }
@@ -343,7 +362,7 @@ namespace LibraryServer
                 LabelName.Content = Name;
                 LabelName.Visibility = Visibility.Visible;
                 TextBoxNameInput.Visibility = Visibility.Collapsed;
-                
+
             }
         }
         /// <summary>
@@ -388,7 +407,7 @@ namespace LibraryServer
 
                     Console.WriteLine("Attempting LogIN");
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("SELECT COUNT(*) from " + ComboBoxRank.SelectionBoxItem.ToString() + "s where Prenume = @nume AND CNP=@cnp;");
+                    sb.Append("SELECT * from " + ComboBoxRank.SelectionBoxItem.ToString() + "s where Prenume = @nume AND CNP=@cnp;");
                     String sql = sb.ToString();
 
 
@@ -398,10 +417,22 @@ namespace LibraryServer
                     {
                         sql_command.Parameters.AddWithValue("@nume", TextBoxUserName.Text.ToString());
                         sql_command.Parameters.AddWithValue("@cnp", PasswordBoxUserPassword.Password.ToString());
-                        int userCount = (int)sql_command.ExecuteScalar();
-                        if (userCount == 0)
+
+                        using (SqlDataReader reader = sql_command.ExecuteReader())
                         {
-                            Console.WriteLine("LogIn failed! User does not exist! \nReseting Values...."); return false;
+                            if (reader.Read())
+                            {
+                                AppUser.SetName(reader["Prenume"] as string);
+                                AppUser.SetLastName(reader["Name"] as string);
+                                AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Teacher") ? false : true);
+                                //AppUser.SetAnAbs(reader["an aboslivre"]);
+                                //AppUser.AddBooks(reader["lista_carti"] as string);
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("LogIn failed! User does not exist! \nReseting Values...."); return false;
+                            }
                         }
                     }
                     Console.WriteLine("User found");

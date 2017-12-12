@@ -6,33 +6,46 @@ using System.Threading.Tasks;
 
 namespace LibraryServer
 {
-    class User : Person
+    public class User : Person
     {
         public bool isTeacher { get; private set; }
 
-        User(String Nume,String Prenume,bool isteacher)
+        User(String Nume, String Prenume, bool isteacher)
         {
             isTeacher = isteacher;
-            setLastName(Nume);
-            setName(Prenume);
+            SetLastName(Nume);
+            SetName(Prenume);
+        }
+
+        public User()
+        {
+
         }
 
 
 
 
-        public void setTeacher(bool isteacher)
+
+        public void SetTeacher(bool isteacher)
         {
             isTeacher = isteacher;
         }
 
-        public override void AddBooks()
+        public override void AddBooks(String cartii)
         {
-            throw new NotImplementedException();
+            String[] carti = cartii.Split(',');
+            foreach (String carte in carti)
+            {
+                ReservedBooks.Add(Convert.ToInt32(carte));
+            }
+
+        //    throw new NotImplementedException();
         }
 
-        public override void RemoveBooks()
+        public override void RemoveBooks(int i )
         {
-            throw new NotImplementedException();
+            ReservedBooks.Remove(i);
+           // throw new NotImplementedException();
         }
     }
 }

@@ -25,20 +25,20 @@
                 <StackPanel>
                     <Button x:Name="ButtonHome"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonHome_Click">
                         <StackPanel Orientation="Horizontal" >
-                            <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center"/>
                             <Label>Home</Label>
                         </StackPanel>
                     </Button>
                     <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Magnify" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <materialDesign:PackIcon Kind="Magnify" Foreground="{DynamicResource SwitchAccentPrimary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Label>Search</Label>
                         </StackPanel>
                     </Button>
 
                     <Button x:Name="ButtonBooks"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonBooks_Click">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="BookPlus" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <materialDesign:PackIcon Kind="BookPlus" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
                             <Label>Add or Modify Books</Label>
                         </StackPanel>
                     </Button>
@@ -72,7 +72,7 @@
                             <materialDesign:PackIcon Kind="ExitToApp" Width="Auto" Height="Auto"/>
                         </Button>
                     </StackPanel>
-                    <ToggleButton Name="MenuToggleButton" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False"/>
+                    <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="False"/>
                     <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center"><Run Text="OOP Library Server"/></TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
