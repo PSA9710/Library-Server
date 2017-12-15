@@ -244,6 +244,8 @@ namespace LibraryServer
                     BUTTONCLOSEDIALOG.Command.Execute(null);
                     var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
                     target.MenuToggleButton.IsEnabled = true;
+                    if(!AppUser.isTeacher)
+                    target.ButtonBooks.Visibility = Visibility.Hidden;
                     e.Handled = true;
                 }
             }
@@ -423,10 +425,10 @@ namespace LibraryServer
                             if (reader.Read())
                             {
                                 AppUser.SetName(reader["Prenume"] as string);
-                                AppUser.SetLastName(reader["Name"] as string);
-                                AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Teacher") ? false : true);
+                               // AppUser.SetLastName(reader["Name"] as string);
+                               // AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Teacher") ? false : true);
                                 //AppUser.SetAnAbs(reader["an aboslivre"]);
-                                //AppUser.AddBooks(reader["lista_carti"] as string);
+                                //AppUser.AddBooks(reader["BookList"] as string);
 
                             }
                             else

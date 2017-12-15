@@ -45,7 +45,6 @@ namespace LibraryServer
         public override void RemoveBooks(int i )
         {
             ReservedBooks.Remove(i);
-           // throw new NotImplementedException();
         }
     }
 }
