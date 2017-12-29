@@ -33,7 +33,7 @@
                     </StackPanel>
                     <Rectangle Height="0.2"/>
                     <Button x:Name="ButtonFindOutMore"  Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom" Click="ButtonFindOutMore_Click" >
-                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Find out more..."/>
+                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Take"/>
                     </Button>
                 </StackPanel>
             </Grid>

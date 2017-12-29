@@ -39,7 +39,7 @@ namespace LibraryServer
 
         private void ButtonFindOutMore_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.Name.ToString());
+           // MessageBox.Show(this.Name.ToString());
         }
     }
 }
