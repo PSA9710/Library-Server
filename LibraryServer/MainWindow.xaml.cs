@@ -23,7 +23,7 @@ namespace LibraryServer
     public partial class MainWindow : Window
     {
 
-        static User AppUser;
+        static public User AppUser;
         static public int tickCount;
 
         public MainWindow()
@@ -136,6 +136,11 @@ namespace LibraryServer
         public  void ToggleButtonEnabled()
         {
             MenuToggleButton.IsEnabled = !MenuToggleButton.IsEnabled;
+        }
+
+        public void AddBookToUser(int ISBN)
+        {
+            AppUser.AddBooks(ISBN.ToString());
         }
     }
 }

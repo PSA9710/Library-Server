@@ -425,10 +425,11 @@ namespace LibraryServer
                             if (reader.Read())
                             {
                                 AppUser.SetName(reader["Prenume"] as string);
-                               // AppUser.SetLastName(reader["Name"] as string);
-                               // AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Teacher") ? false : true);
-                                //AppUser.SetAnAbs(reader["an aboslivre"]);
-                                //AppUser.AddBooks(reader["BookList"] as string);
+                                AppUser.SetLastName(reader["Nume"] as string);
+                                AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Librarian") ? false : true);
+                                if(!AppUser.isTeacher)
+                                AppUser.SetAnAbs(reader.GetInt32(reader.GetOrdinal("An_absolvire")));
+                                AppUser.AddBooks(reader["BookList"] as string);
 
                             }
                             else

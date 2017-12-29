@@ -32,7 +32,7 @@ namespace LibraryServer
         }
 
         public override void AddBooks(String cartii)
-        {
+        {   if (cartii == null) return;
             String[] carti = cartii.Split(',');
             foreach (String carte in carti)
             {
@@ -42,9 +42,20 @@ namespace LibraryServer
         //    throw new NotImplementedException();
         }
 
+        public override void AddBooks(int ISBN)
+        {
+            ReservedBooks.Add(ISBN);
+            //throw new NotImplementedException();
+        }
+
         public override void RemoveBooks(int i )
         {
             ReservedBooks.Remove(i);
+        }
+        //SQL TO UPDATE USER
+        private void UserUpdate()
+        {
+
         }
     }
 }

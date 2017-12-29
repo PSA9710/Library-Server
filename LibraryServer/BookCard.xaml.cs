@@ -39,7 +39,9 @@ namespace LibraryServer
 
         private void ButtonFindOutMore_Click(object sender, RoutedEventArgs e)
         {
-           // MessageBox.Show(this.Name.ToString());
+            // MessageBox.Show(this.Name.ToString());
+            var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
+            target.AddBookToUser(book.ISBN);
         }
     }
 }
