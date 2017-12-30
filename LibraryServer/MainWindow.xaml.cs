@@ -140,7 +140,10 @@ namespace LibraryServer
 
         public void AddBookToUser(int ISBN)
         {
-            AppUser.AddBooks(ISBN.ToString());
+            //MessageBox.Show(ISBN.ToString());
+            AppUser.AddBooks(ISBN);
+            foreach (int i in AppUser.ReservedBooks)
+                MessageBox.Show(i.ToString());
         }
     }
 }

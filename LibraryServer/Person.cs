@@ -12,7 +12,7 @@ namespace LibraryServer
         public String Name { get; private set; }
         public String LastName { get; private set; }
         public int AnAbs { get; private set; }
-        public List<int> ReservedBooks { get; private set; }
+        public List<int> ReservedBooks { get; private set; } = new List<int>();
 
         public void SetName(String name)
         {

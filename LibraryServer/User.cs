@@ -15,6 +15,7 @@ namespace LibraryServer
             isTeacher = isteacher;
             SetLastName(Nume);
             SetName(Prenume);
+            
         }
 
         public User()
@@ -44,6 +45,7 @@ namespace LibraryServer
 
         public override void AddBooks(int ISBN)
         {
+            //ReservedBooks.Add(5);
             ReservedBooks.Add(ISBN);
             //throw new NotImplementedException();
         }
@@ -52,10 +54,6 @@ namespace LibraryServer
         {
             ReservedBooks.Remove(i);
         }
-        //SQL TO UPDATE USER
-        private void UserUpdate()
-        {
-
-        }
+        
     }
 }

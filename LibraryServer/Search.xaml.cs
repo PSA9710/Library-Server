@@ -99,7 +99,7 @@ namespace LibraryServer
                         while(reader.Read())
                         {
                             Book bk = new Book();
-                            String ISBN = reader.GetInt32(reader.GetOrdinal("ISBN")).ToString();
+                            int ISBN = reader.GetInt32(reader.GetOrdinal("ISBN"));
                             String name = reader["book_name"] as string;
                             String Author = SQL_GetAuthor(reader.GetInt32(reader.GetOrdinal("author_ID")));
                             String Publisher = SQL_GetPublisher(reader.GetInt32(reader.GetOrdinal("publisher_ID")));
@@ -107,7 +107,7 @@ namespace LibraryServer
                             String NoCopies = reader.GetInt32(reader.GetOrdinal("no_of_copies")).ToString();
                             if (Convert.ToInt32(NoCopies) > 0)
                             {
-                                bk = new Book(ISBN, name, Author, Publisher, NoCopies, Description);
+                                bk = new Book(ISBN.ToString(), name, Author, Publisher, NoCopies, Description);
                                 SpawnCard(bk);
                             }
                         }

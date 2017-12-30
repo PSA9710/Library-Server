@@ -229,15 +229,7 @@ namespace LibraryServer
                         return;
                     }
 
-                    if (AppUser.AnAbs > DateTime.Now.Year && !AppUser.isTeacher)
-                    {
-                        var message = "User is no more a Student";
-                        SnackBarDialogHostMessageDisplay(message, 1000);
-                        PasswordBoxUserPassword.Password = "";
-                        TextBoxUserName.Text = "";
-                        TextBoxUserName.Focus();
-                        return;
-                    }
+                    
 
                     Console.WriteLine("Closing Dialog Host");
                     AcceptButtonIsPressed = true;
@@ -427,10 +419,22 @@ namespace LibraryServer
                                 AppUser.SetName(reader["Prenume"] as string);
                                 AppUser.SetLastName(reader["Nume"] as string);
                                 AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Librarian") ? false : true);
-                                if(!AppUser.isTeacher)
+                                
+
+                                if (AppUser.AnAbs > DateTime.Now.Year && !AppUser.isTeacher)
+                                {
+                                    var message = "User is no more a Student";
+                                    SnackBarDialogHostMessageDisplay(message, 1000);
+                                    PasswordBoxUserPassword.Password = "";
+                                    TextBoxUserName.Text = "";
+                                    TextBoxUserName.Focus();
+                                    return false;
+                                }
+
+
+                                if (!AppUser.isTeacher)
                                 AppUser.SetAnAbs(reader.GetInt32(reader.GetOrdinal("An_absolvire")));
                                 AppUser.AddBooks(reader["BookList"] as string);
-
                             }
                             else
                             {
