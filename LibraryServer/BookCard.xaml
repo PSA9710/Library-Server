@@ -35,6 +35,9 @@
                     <Button x:Name="ButtonFindOutMore"  Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom" Click="ButtonFindOutMore_Click" >
                         <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Take"/>
                     </Button>
+                    <Button x:Name="ButtonRemove" Visibility="Hidden" Height="0"  Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom" Click="ButtonRemove_Click" >
+                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Take"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>

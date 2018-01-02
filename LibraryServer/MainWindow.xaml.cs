@@ -158,6 +158,11 @@ namespace LibraryServer
                 MessageBox.Show(i.ToString());
         }
 
+        public void RemoveBookFromUser(int ISBN)
+        {
+            Console.WriteLine("Removing Book from User with ISBN=" + ISBN.ToString());
+            AppUser.RemoveBooks(ISBN);
+        }
         
     }
 }

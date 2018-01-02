@@ -36,6 +36,18 @@ namespace LibraryServer
             TextBlockAuthor.Text = "written by " + book.Author;
             TextBlockDescription.Text = "   " + book.Description;
         }
+        public BookCard(Book b, bool remove)
+        {
+            book = b;
+            InitializeComponent();
+            TextBlockBookTitle.Text = book.BookName;
+            TextBlockAuthor.Text = "written by " + book.Author;
+            TextBlockDescription.Text = "   " + book.Description;
+            ButtonFindOutMore.Height = 0;
+            ButtonFindOutMore.Visibility = Visibility.Hidden;
+            ButtonRemove.Height = 32;
+            ButtonRemove.Visibility = Visibility.Visible;
+        }
 
         private void ButtonFindOutMore_Click(object sender, RoutedEventArgs e)
         {
@@ -44,6 +56,13 @@ namespace LibraryServer
             var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
             Console.WriteLine("Taking Book with ISBN:" + book.ISBN.ToString());
             target.AddBookToUser(book.ISBN);
+        }
+
+        private void ButtonRemove_Click(object sender, RoutedEventArgs e)
+        {
+            var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
+            Console.WriteLine("Taking Book with ISBN:" + book.ISBN.ToString());
+            target.RemoveBookFromUser(book.ISBN);
         }
     }
 }
