@@ -45,9 +45,9 @@ namespace LibraryServer
         public void SetUser(User A)
         {
             AppUser = A;
-
+            
         }
-
+        
 
 
         /// <summary>

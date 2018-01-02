@@ -37,6 +37,7 @@ namespace LibraryServer
         public abstract void AddBooks(String carti);
         public abstract void AddBooks(int ISBN);
         public abstract void RemoveBooks(int i);
+        //public abstract void UpdateRegisteredUserBooks();
 
     }
 }

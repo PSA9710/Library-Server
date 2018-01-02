@@ -419,7 +419,7 @@ namespace LibraryServer
                                 AppUser.SetName(reader["Prenume"] as string);
                                 AppUser.SetLastName(reader["Nume"] as string);
                                 AppUser.SetTeacher((ComboBoxRank.SelectionBoxItem.ToString() != "Librarian") ? false : true);
-                                
+                                AppUser.SetCNP(PasswordBoxUserPassword.Password.ToString());
 
                                 if (AppUser.AnAbs > DateTime.Now.Year && !AppUser.isTeacher)
                                 {
