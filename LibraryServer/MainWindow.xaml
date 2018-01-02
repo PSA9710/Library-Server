@@ -29,6 +29,12 @@
                             <Label>Home</Label>
                         </StackPanel>
                     </Button>
+                    <Button x:Name="ButtonList"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonList_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookOpenPageVariant" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
+                            <Label>Booked Books</Label>
+                        </StackPanel>
+                    </Button>
                     <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Magnify" Foreground="{DynamicResource SwitchAccentPrimary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -59,6 +65,7 @@
                 <local:Home x:Name="Home" Height="Auto"  Visibility="Visible"/>
                 <local:BOOKS x:Name="BOOKS" Visibility="Hidden"/>
                 <local:Search x:Name="UISearch" Visibility="Hidden" />
+                <local:ListBooks x:Name="ListBooks" Visibility="Hidden"/>
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>

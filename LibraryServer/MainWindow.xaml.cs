@@ -32,6 +32,7 @@ namespace LibraryServer
             InitializeTimer();
             AppUser = new User();
             Home.SetUser(AppUser);
+            ListBooks.SetUser(AppUser);
         }
 
         
@@ -117,6 +118,7 @@ namespace LibraryServer
             Home.Visibility = Visibility.Visible;
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Hidden;
+            ListBooks.Visibility = Visibility.Hidden;
         }
 
         private void ButtonBooks_Click(object sender, RoutedEventArgs e)
@@ -124,6 +126,7 @@ namespace LibraryServer
             Home.Visibility = Visibility.Hidden;
             BOOKS.Visibility = Visibility.Visible;
             UISearch.Visibility = Visibility.Hidden;
+            ListBooks.Visibility = Visibility.Hidden;
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -131,6 +134,15 @@ namespace LibraryServer
             Home.Visibility = Visibility.Hidden;
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Visible;
+            ListBooks.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonList_Click(object sender, RoutedEventArgs e)
+        {
+            Home.Visibility = Visibility.Hidden;
+            BOOKS.Visibility = Visibility.Hidden;
+            UISearch.Visibility = Visibility.Hidden;
+            ListBooks.Visibility = Visibility.Visible;
         }
 
         public  void ToggleButtonEnabled()
@@ -145,5 +157,7 @@ namespace LibraryServer
             foreach (int i in AppUser.ReservedBooks)
                 MessageBox.Show(i.ToString());
         }
+
+        
     }
 }
