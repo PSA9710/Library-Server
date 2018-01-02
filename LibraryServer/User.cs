@@ -35,12 +35,13 @@ namespace LibraryServer
 
         public override void AddBooks(String cartii)
         {   if (cartii == null) return;
+            Console.WriteLine("The books are:" + cartii);
             String[] carti = cartii.Split(',');
             foreach (String carte in carti)
             {
                 ReservedBooks.Add(Convert.ToInt32(carte));
             }
-
+            
         //    throw new NotImplementedException();
         }
 
@@ -61,7 +62,7 @@ namespace LibraryServer
         private void UpdateRegisteredUserBooks()
         {
             String books = null;
-            Console.WriteLine("Creating the sting of books");
+            Console.WriteLine("Creating the string of books");
             if (ReservedBooks.Count == 0) { Console.WriteLine("There is no book in order to create the update"); return; }
             foreach (int book in ReservedBooks)
             {

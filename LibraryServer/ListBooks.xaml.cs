@@ -30,70 +30,83 @@ namespace LibraryServer
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             Console.WriteLine("ListBooks UserControl is Visible..");
-            if(this.Visibility==Visibility.Visible)
+            if (this.Visibility == Visibility.Visible)
             {
-                if(AppUser.ReservedBooks.Count==0)
+                if (AppUser.ReservedBooks.Count == 0)
                 {
                     Console.WriteLine("User has no booked books");
                     return;
                 }
+                WrapPanelDisplayCards.Children.Clear();
                 Console.WriteLine("Listing Books...");
-                SQL_Querry();
+                SQL_Querry(BuildBooksString());
             }
         }
 
         public void SetUser(User A)
         {
             AppUser = A;
-            
-        }
-        
 
+        }
+
+        private string BuildBooksString()
+        {
+            string s = null;
+
+            s = "(";
+            foreach(int book in AppUser.ReservedBooks)
+            {
+                s += "'" + book + "',";
+            }
+            s = s.Remove(s.Length - 1);
+            s += ")";
+            Console.WriteLine("The string of books to show:" + s);
+            return s;
+        }
 
         /// <summary>
         /// Search the DB for entries that have author or publisher or bookname in it
         /// </summary>
-        private void SQL_Querry()
+        private void SQL_Querry(String BOOKS)
         {
-            foreach (int book in AppUser.ReservedBooks)
-            {
-                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
-                {
-                    Console.WriteLine("Connecting to the database for querrying....initializing");
-                    con.Open();
 
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("select * from Books where Id="+book.ToString());
-                    string sql = sb.ToString();
-                    using (SqlCommand cmd = new SqlCommand(sql, con))
+            using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+            {
+                Console.WriteLine("Connecting to the database for querrying....initializing");
+                con.Open();
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("select * from Books where ISBN in"+BOOKS) ;
+                string sql = sb.ToString();
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    //cmd.Parameters.AddWithValue("@name", "%" + TextBoxSearch.Text + "%");
+                    try
                     {
-                        //cmd.Parameters.AddWithValue("@name", "%" + TextBoxSearch.Text + "%");
-                        try
-                        {
-                            using (SqlDataReader reader = cmd.ExecuteReader())
-                                while (reader.Read())
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                            while (reader.Read())
+                            {
+                                Book bk = new Book();
+                                int ISBN = reader.GetInt32(reader.GetOrdinal("ISBN"));
+                                String name = reader["book_name"] as string;
+                                String Author = SQL_GetAuthor(reader.GetInt32(reader.GetOrdinal("author_ID")));
+                                //String Publisher = SQL_GetPublisher(reader.GetInt32(reader.GetOrdinal("publisher_ID")));
+                                String Description = reader["description"] as string;
+                                String NoCopies = reader.GetInt32(reader.GetOrdinal("no_of_copies")).ToString();
+                                if (Convert.ToInt32(NoCopies) > 0)
                                 {
-                                    Book bk = new Book();
-                                    int ISBN = reader.GetInt32(reader.GetOrdinal("ISBN"));
-                                    String name = reader["book_name"] as string;
-                                    String Author = SQL_GetAuthor(reader.GetInt32(reader.GetOrdinal("author_ID")));
-                                    //String Publisher = SQL_GetPublisher(reader.GetInt32(reader.GetOrdinal("publisher_ID")));
-                                    String Description = reader["description"] as string;
-                                    String NoCopies = reader.GetInt32(reader.GetOrdinal("no_of_copies")).ToString();
-                                    if (Convert.ToInt32(NoCopies) > 0)
-                                    {
-                                        bk = new Book(ISBN.ToString(), name, Author, null, NoCopies, Description);
-                                        SpawnCard(bk);
-                                    }
+                                    bk = new Book(ISBN.ToString(), name, Author, null, NoCopies, Description);
+                                    SpawnCard(bk);
                                 }
-                        }
-                        catch (SqlException ex)
-                        {
-                            MessageBox.Show(ex.ToString());
-                        }
+                            }
                     }
-                    con.Close();
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
                 }
+                con.Close();
+
             }
         }
         BookCard bk1;
