@@ -164,5 +164,9 @@ namespace LibraryServer
             AppUser.RemoveBooks(ISBN);
         }
         
+        public void ListBookUpdateAfterRemove()
+        {
+            ListBooks.UpdateDisplayAfterDelete();
+        }
     }
 }

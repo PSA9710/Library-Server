@@ -43,6 +43,12 @@ namespace LibraryServer
             }
         }
 
+        public void UpdateDisplayAfterDelete()
+        {
+            WrapPanelDisplayCards.Children.Clear();
+            SQL_Querry(BuildBooksString());
+        }
+
         public void SetUser(User A)
         {
             AppUser = A;
@@ -116,7 +122,7 @@ namespace LibraryServer
         static int numberOfCard = 1;
         private void SpawnCard(Book bk)
         {
-            bk1 = new BookCard(bk);
+            bk1 = new BookCard(bk,true);
             Console.WriteLine("Inserting new Card...");
             bk1.Name = "BookCard" + numberOfCard.ToString();
             numberOfCard++;

@@ -61,8 +61,9 @@ namespace LibraryServer
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
         {
             var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
-            Console.WriteLine("Taking Book with ISBN:" + book.ISBN.ToString());
+            Console.WriteLine("Removing Book with ISBN:" + book.ISBN.ToString());
             target.RemoveBookFromUser(book.ISBN);
+            target.ListBookUpdateAfterRemove();
         }
     }
 }

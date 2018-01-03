@@ -36,7 +36,7 @@
                         <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Take"/>
                     </Button>
                     <Button x:Name="ButtonRemove" Visibility="Hidden" Height="0"  Style="{StaticResource MaterialDesignFlatButton}" VerticalAlignment="Bottom" Click="ButtonRemove_Click" >
-                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Take"/>
+                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Remove Book"/>
                     </Button>
                 </StackPanel>
             </Grid>

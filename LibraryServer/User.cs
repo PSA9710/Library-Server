@@ -56,7 +56,17 @@ namespace LibraryServer
 
         public override void RemoveBooks(int i )
         {
+            String books = null;
+            Console.WriteLine("Removing book with ISBN:" + i.ToString() + " from list");
             ReservedBooks.Remove(i);
+            foreach (int book in ReservedBooks)
+            {
+                books += book + ",";
+            }
+            books = books.Remove(books.Length - 1);
+            Console.WriteLine("The String with registered books:" + books);
+
+            UpdateRegisteredUserBooks();
         }
 
         private void UpdateRegisteredUserBooks()
