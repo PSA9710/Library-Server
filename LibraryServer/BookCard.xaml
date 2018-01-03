@@ -23,7 +23,6 @@
             <Image Grid.Column="0" Width="155" Height="205" Source="https://s.hswstatic.com/gif/2017-Chevrolet-Corvette-Grand-Sport.jpg" Stretch="Fill" Visibility="Visible"/>
             <materialDesign:PackIcon Kind="BookOpenPageVariant" Grid.Column="0" Width="145" Height="195" Margin="5" />
             <Grid Grid.Column="1" Width="200">
-                <StackPanel>
                     <StackPanel HorizontalAlignment="Right" Margin="10,5,10,0">
                         <TextBlock x:Name="TextBlockBookTitle" Style="{StaticResource MaterialDesignTitleTextBlock}" FontSize="24" TextTrimming="CharacterEllipsis" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">Ana are mere mihai are pere</TextBlock>
                         <TextBlock x:Name="TextBlockAuthor" Style="{StaticResource MaterialDesignHeadlineTextBlock}" FontSize="15" HorizontalAlignment="Right" Margin="0,-5,0,0" FontWeight="Medium">written By Mihai Luca</TextBlock>
@@ -35,14 +34,13 @@
                     <Button x:Name="ButtonFindOutMore"  Style="{StaticResource MaterialDesignFlatButton}" 
                             ToolTip="Book this Book"
                             VerticalAlignment="Bottom" Click="ButtonFindOutMore_Click" >
-                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="take this book"/>
+                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Take this book!"/>
                     </Button>
                     <Button x:Name="ButtonRemove" Visibility="Hidden" Height="0"  Style="{StaticResource MaterialDesignFlatButton}" 
                             ToolTip="Remove this book from the ones you have booked"
                             VerticalAlignment="Bottom" Click="ButtonRemove_Click" >
-                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Remove Book"/>
+                        <Label  Foreground="{DynamicResource SwitchAccentPrimary}"  Content="Remove Book!"/>
                     </Button>
-                </StackPanel>
             </Grid>
         </Grid>
     </materialDesign:Card>
