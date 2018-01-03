@@ -31,6 +31,11 @@ namespace LibraryServer
             }
         }
 
+        private String oldProfession;
+
+
+        //FIELDS CAN NOT BE EMPTY!!!
+
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             if(ButtonSave.Content as string =="ADD")
@@ -47,13 +52,19 @@ namespace LibraryServer
 
         private void UpdateUser()
         {
+
+            String profesie = ComboBoxProfession.SelectionBoxItem.ToString();
+            if(oldProfession!=profesie)
+            {
+                DeleteEntry();
+                return;
+            }
             try
             {
                 Console.WriteLine("Updating User");
                 using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
                 {
                     con.Open();
-                    String profesie = ComboBoxProfession.SelectionBoxItem.ToString();
                     String sql = "update " + profesie + "s set Nume=@nume, Prenume=@prenume, Profilepic=@profilepic";
                     if(profesie=="Student")
                     {
@@ -71,6 +82,12 @@ namespace LibraryServer
                             cmd.Parameters.AddWithValue("@anabs", ComboBoxAn.SelectionBoxItem.ToString());
                         }
                         cmd.ExecuteNonQuery();
+
+                        Console.WriteLine("User modified successfully");
+                        var message = "User Data modified successfully";
+                        SnackBarDisplay1(message, 2000);
+                        ResetFields();
+
                     }
                 }
             }
@@ -78,6 +95,33 @@ namespace LibraryServer
             {
                 MessageBox.Show(e.ToString());
             }
+        }
+
+
+        private void DeleteEntry()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+                {
+                    Console.WriteLine("Deleting entry from old table");
+                    con.Open();
+                    string sql = "delete from ";
+                    sql += oldProfession + "s where CNP=@cnp";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cnp", TextBoxCNP.Text);
+                        cmd.ExecuteNonQuery();
+                        Console.WriteLine("Entry deleted successfully..");
+                        AddUser();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+
         }
 
         private void AddUser()
@@ -112,8 +156,8 @@ namespace LibraryServer
                             cmd.Parameters.AddWithValue("@anabs", ComboBoxAn.SelectionBoxItem.ToString());
                         }
                         cmd.ExecuteNonQuery();
-                        Console.WriteLine("User Registered succesfull");
-                        var message = "User Registered Succesfull";
+                        Console.WriteLine("User Registered successfully");
+                        var message = "User Registered Successfully";
                         SnackBarDisplay1(message, 2000);
                         ResetFields();
                     }
@@ -186,6 +230,7 @@ namespace LibraryServer
                     if(SQLSEARCH())
                     {
                         ButtonSave.Content = "Modify";
+                        TextBoxCNP.IsEnabled = false;
                     }
                     else
                     {
@@ -230,9 +275,11 @@ namespace LibraryServer
                                 TextBoxNume.Text = reader["Nume"] as string;
                                 TextBoxPreNume.Text = reader["Prenume"] as string;
                                 TextBoxProfilePic.Text = reader["Profilepic"] as string;
+                                ComboBoxAn.SelectedItem = reader.GetInt32(reader.GetOrdinal("An_absolvire"));
                                 ComboBoxProfession.SelectedIndex = 0;
                                 ResetAnABS();
                                 Console.WriteLine("Student found");
+                                oldProfession = "Student";
                                 return true;
                             }
                             else
@@ -274,11 +321,13 @@ namespace LibraryServer
                                 ComboBoxAn.Height = 0;
                                 ComboBoxAn.Margin = new Thickness(0);
                                 Console.WriteLine("Librarian found");
+                                oldProfession = "Librarian";
                                 return true;
                             }
                             else
                             {
                                 Console.WriteLine("Entry not found... it's a new user..");
+                                oldProfession = "";
                                 return false;
                             }
                         }
@@ -302,6 +351,7 @@ namespace LibraryServer
 
         private void ResetFields()
         {
+            TextBoxCNP.IsEnabled = true;
             TextBoxCNP.Text = "";
             TextBoxNume.Text = "";
             TextBoxPreNume.Text = "";
