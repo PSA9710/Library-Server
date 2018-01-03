@@ -15,23 +15,24 @@
              d:DesignHeight="574" d:DesignWidth="600">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <TextBox x:Name="TextBoxISBN" materialDesign:HintAssist.Hint="ISBN:" 
+            <TextBox x:Name="TextBoxISBN" materialDesign:HintAssist.Hint="ISBN:" ToolTip="Enter the ISBN of a book u wish to edit or add"
 				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" PreviewKeyDown="TextBoxISBN_PreviewKeyDown" MaxLength="9" PreviewLostKeyboardFocus="TextBoxISBN_PreviewLostKeyboardFocus" />
-            <TextBox x:Name="TextBoxBookName" materialDesign:HintAssist.Hint="Name of the book:" 
+            <TextBox x:Name="TextBoxBookName" materialDesign:HintAssist.Hint="Name of the book:" ToolTip="Enter the name of the book"
 				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
-            <TextBox x:Name="TextBoxAuthor" materialDesign:HintAssist.Hint="Author" 
+            <TextBox x:Name="TextBoxAuthor" materialDesign:HintAssist.Hint="Author" ToolTip="Enter the author of the book"
 				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
-            <TextBox x:Name="TextBoxPublisher" materialDesign:HintAssist.Hint="Publisher" 
+            <TextBox x:Name="TextBoxPublisher" materialDesign:HintAssist.Hint="Publisher" ToolTip="Enter the publisher of the book"
 				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
             <ComboBox materialDesign:HintAssist.Hint="No of Copies:"
                 x:Name="ComboBoxCopies" HorizontalAlignment="Center" />
             <TextBox x:Name="TextBoxDescription" TextWrapping="Wrap" VerticalAlignment="Stretch" 
                  MaxWidth="300"
 				 AcceptsReturn="True"                 
+                     ToolTip="Add a short description of the Book"
 				 VerticalScrollBarVisibility="Auto"
 				 SpellCheck.IsEnabled="True"
 				 materialDesign:HintAssist.Hint="Multiline text"
-				 Height="40" Margin="0,100,0,0">Multiline.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The quick brown fox jumps over the lazy dog. War and peace. Keep going. Go on. For how long? Not long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</TextBox>
+				 Height="40" Margin="0,100,0,0" Text="Description of the Book"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="ButtonSave" Click="ButtonSave_Click">Save</Button>
                 <Button x:Name="ButtonCancel" Click="ButtonCancel_Click">Cancel</Button>
