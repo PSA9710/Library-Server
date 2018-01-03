@@ -29,5 +29,9 @@ namespace LibraryServer
             No_Copies = Convert.ToInt32(copies);
             Description = description;
         }
+        public void SetCopies(int i)
+        {
+            No_Copies = i;
+        }
     }
 }

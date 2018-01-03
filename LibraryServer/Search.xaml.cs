@@ -73,7 +73,7 @@ namespace LibraryServer
         /// <returns>Returns the Publisher as a string</returns>
         private String SQL_GetPublisher(int i)
         {
-            return "idiot";
+            return "Publisher";
         }
         /// <summary>
         /// Search the DB for entries that have author or publisher or bookname in it

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,8 @@ namespace LibraryServer
             var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
             Console.WriteLine("Taking Book with ISBN:" + book.ISBN.ToString());
             target.AddBookToUser(book.ISBN);
+            book.SetCopies(book.No_Copies - 1);
+            UpdateBookNoOfCopies();
         }
 
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
@@ -64,6 +67,34 @@ namespace LibraryServer
             Console.WriteLine("Removing Book with ISBN:" + book.ISBN.ToString());
             target.RemoveBookFromUser(book.ISBN);
             target.ListBookUpdateAfterRemove();
+            book.SetCopies(book.No_Copies + 1);
+            UpdateBookNoOfCopies();
+        }
+        /// <summary>
+        /// Updates the number of books the library has
+        /// </summary>
+        private void UpdateBookNoOfCopies()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+                {
+                    con.Open();
+
+                    String sql = "update Books set no_of_copies=@noCopies where ISBN=" + book.ISBN;
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        cmd.Parameters.AddWithValue("@noCopies", book.No_Copies.ToString());
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+
+
         }
     }
 }
