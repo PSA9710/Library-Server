@@ -38,6 +38,13 @@ namespace LibraryServer
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            if(!CheckEmptyFields())
+            {
+                var message = "Please make sure all the fields are completed";
+                SnackBarDisplay1(message, 2000);
+                e.Handled = true;
+                return;
+            }
             if(ButtonSave.Content as string =="ADD")
             {
                 AddUser();
@@ -48,11 +55,31 @@ namespace LibraryServer
             }
         }
 
+        /// <summary>
+        /// Checks all the fields have been completed before Saving
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckEmptyFields()
+        {
+            if (TextBoxCNP.Text == "") return false;
+            if (TextBoxNume.Text == "") return false;
+            if (TextBoxPreNume.Text == "") return false;
+            if (TextBoxProfilePic.Text == "") return false;
+            if (ComboBoxProfession.SelectedIndex == -1) return false;
+            if(ComboBoxProfession.SelectionBoxItem.ToString()=="Student")
+            {
+                if (ComboBoxAn.SelectedIndex == -1) return false;
+            }
+
+            return true;
+
+        }
+
         //check if userprofesion changed to delete
 
         private void UpdateUser()
         {
-
+            //check if userprofesion changed, if so, delete entry and create one in the other database
             String profesie = ComboBoxProfession.SelectionBoxItem.ToString();
             if(oldProfession!=profesie)
             {
@@ -208,8 +235,15 @@ namespace LibraryServer
                 SnackBarDisplay(message, 1000);
                 e.Handled = true;
             }
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter||TextBoxCNP.Text.Length==13)
             {
+                if (TextBoxCNP.Text.Length != 13)
+                {
+                    var message = "Please enter a valid CNP";
+                    SnackBarDisplay1(message, 1000);
+                    e.Handled = true;
+                    return;
+                }
                 if (!CheckStringOnlyNumbers(TextBoxCNP.Text))
                 {
                     TextBoxCNP.Text = "";
@@ -361,7 +395,53 @@ namespace LibraryServer
 
         }
 
+        private void ComboBoxProfession_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //retains what it was when the event fired, not the new value
+            if(ComboBoxProfession.SelectionBoxItem.ToString()!="Student")
+            {
+                ResetAnABS();
+            }
+            else
+            {
+                ComboBoxAn.Height = 0;
+                ComboBoxAn.Margin = new Thickness(0);
+            }
+        }
 
+        private void TextBoxCNP_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TextBoxCNP.Text.Length == 13)
+            {
+                if (!CheckStringOnlyNumbers(TextBoxCNP.Text))
+                {
+                    TextBoxCNP.Text = "";
+                    var message = "CNP must contain only numbers!";
+                    SnackBarDisplay(message, 1000);
+                    e.Handled = true;
+                }
+                else
+                {
+                    if (TextBoxCNP.Text.Length < 13)
+                    {
+                        Console.WriteLine("Attempted to querry a invalid CNP...Aborting");
+                        var message = "CNP should be no more or less than 13 digits. Are you sure the CNP is right?";
+                        SnackBarDisplay(message, 1000);
+                        e.Handled = true;
+                        return;
+                    }
+                    if (SQLSEARCH())
+                    {
+                        ButtonSave.Content = "Modify";
+                        TextBoxCNP.IsEnabled = false;
+                    }
+                    else
+                    {
+                        ButtonSave.Content = "ADD";
+                    }
+                }
+            }
+        }
     }
 
 
