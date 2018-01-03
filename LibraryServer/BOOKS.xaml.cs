@@ -179,7 +179,7 @@ namespace LibraryServer
                                 string a, b;
                                 a = reader["first_Name"] as string;
                                 b = reader["last_Name"] as string;
-                                MessageBox.Show(a + b);
+                                //MessageBox.Show(a + b);
                                 TextBoxAuthor.Text = a + " " + b;
                             }
                         }
@@ -280,7 +280,7 @@ namespace LibraryServer
                         if (reader.Read())
                         {
                             id = reader.GetInt32(0);
-                            MessageBox.Show(id.ToString());
+                            //MessageBox.Show(id.ToString());
                         }
                     }
                 }
@@ -394,7 +394,7 @@ namespace LibraryServer
                         if (reader.Read())
                         {
                             id = reader.GetInt32(0);
-                            MessageBox.Show(id.ToString());
+                            //MessageBox.Show(id.ToString());
                         }
                     }
                 }
@@ -467,7 +467,7 @@ namespace LibraryServer
                 Console.WriteLine("Inserting new entry in the table with ISBN " + TextBoxISBN.Text);
                 SQL_BOOK_insert();
             }
-
+            ButtonCancel_Click(this, e);
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)

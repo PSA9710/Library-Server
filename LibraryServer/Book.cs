@@ -29,6 +29,10 @@ namespace LibraryServer
             No_Copies = Convert.ToInt32(copies);
             Description = description;
         }
+        /// <summary>
+        /// Set the number of copies of one book
+        /// </summary>
+        /// <param name="i">The number which is set</param>
         public void SetCopies(int i)
         {
             No_Copies = i;

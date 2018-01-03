@@ -16,15 +16,15 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
             <TextBox x:Name="TextBoxISBN" materialDesign:HintAssist.Hint="ISBN:" ToolTip="Enter the ISBN of a book u wish to edit or add"
-				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" PreviewKeyDown="TextBoxISBN_PreviewKeyDown" MaxLength="9" PreviewLostKeyboardFocus="TextBoxISBN_PreviewLostKeyboardFocus" />
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="200" HorizontalAlignment="Center" PreviewKeyDown="TextBoxISBN_PreviewKeyDown" MaxLength="9" PreviewLostKeyboardFocus="TextBoxISBN_PreviewLostKeyboardFocus" />
             <TextBox x:Name="TextBoxBookName" materialDesign:HintAssist.Hint="Name of the book:" ToolTip="Enter the name of the book"
-				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" />
             <TextBox x:Name="TextBoxAuthor" materialDesign:HintAssist.Hint="Author" ToolTip="Enter the author of the book"
-				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" />
             <TextBox x:Name="TextBoxPublisher" materialDesign:HintAssist.Hint="Publisher" ToolTip="Enter the publisher of the book"
-				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="100" HorizontalAlignment="Center" />
-            <ComboBox materialDesign:HintAssist.Hint="No of Copies:"
-                x:Name="ComboBoxCopies" HorizontalAlignment="Center" />
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" />
+            <ComboBox materialDesign:HintAssist.Hint="No of Copies:"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                x:Name="ComboBoxCopies" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" />
             <TextBox x:Name="TextBoxDescription" TextWrapping="Wrap" VerticalAlignment="Stretch" 
                  MaxWidth="300"
 				 AcceptsReturn="True"                 
@@ -32,10 +32,10 @@
 				 VerticalScrollBarVisibility="Auto"
 				 SpellCheck.IsEnabled="True"
 				 materialDesign:HintAssist.Hint="Multiline text"
-				 Height="40" Margin="0,100,0,0" Text="Description of the Book"/>
+				 Height="40" Margin="0,20" Text="Description of the Book"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="ButtonSave" Click="ButtonSave_Click">Save</Button>
-                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click">Cancel</Button>
+                <Button x:Name="ButtonSave" Click="ButtonSave_Click" Margin="0,0,10,0">Save</Button>
+                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="10,0,0,0">Cancel</Button>
             </StackPanel>
         </StackPanel>
         <materialDesign:Snackbar x:Name="SnackbarDisplay" VerticalContentAlignment="Bottom" MaxWidth="600" />

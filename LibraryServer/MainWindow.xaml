@@ -23,26 +23,26 @@
                               HorizontalAlignment="Right" Margin="16"
                               IsChecked="{Binding ElementName=MenuToggleButton,Path=IsChecked,Mode=TwoWay}"/>
                 <StackPanel>
-                    <Button x:Name="ButtonHome"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonHome_Click">
+                    <Button x:Name="ButtonHome"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonHome_Click" HorizontalContentAlignment="Left">
                         <StackPanel Orientation="Horizontal" >
                             <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center"/>
                             <Label>Home</Label>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="ButtonList"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonList_Click">
+                    <Button x:Name="ButtonList"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonList_Click" HorizontalContentAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookOpenPageVariant" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
                             <Label>Booked Books</Label>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click">
+                    <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click" HorizontalContentAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Magnify" Foreground="{DynamicResource SwitchAccentPrimary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Label>Search</Label>
                         </StackPanel>
                     </Button>
 
-                    <Button x:Name="ButtonBooks"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonBooks_Click">
+                    <Button x:Name="ButtonBooks"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonBooks_Click" HorizontalContentAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="BookPlus" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
                             <Label>Add or Modify Books</Label>
