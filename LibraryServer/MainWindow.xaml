@@ -19,7 +19,7 @@
             <DockPanel MinWidth="212">
                 <ToggleButton x:Name="ToggleButtonMenu" Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                               DockPanel.Dock="Top"
-                              IsEnabled="False"
+                              IsEnabled="True"
                               HorizontalAlignment="Right" Margin="16"
                               IsChecked="{Binding ElementName=MenuToggleButton,Path=IsChecked,Mode=TwoWay}"/>
                 <StackPanel>
