@@ -119,6 +119,7 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Hidden;
             ListBooks.Visibility = Visibility.Hidden;
+            USERs.Visibility = Visibility.Hidden;
             TextBlockWhereIAm.Text = "Library: Home";
         }
 
@@ -128,7 +129,8 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Visible;
             UISearch.Visibility = Visibility.Hidden;
             ListBooks.Visibility = Visibility.Hidden;
-            TextBlockWhereIAm.Text = "Library: Add or Remove Books";
+            USERs.Visibility = Visibility.Hidden;
+            TextBlockWhereIAm.Text = "Library: Add or Modify Books";
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -137,6 +139,7 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Visible;
             ListBooks.Visibility = Visibility.Hidden;
+            USERs.Visibility = Visibility.Hidden;
             TextBlockWhereIAm.Text = "Library: Search Books";
         }
 
@@ -146,7 +149,18 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Hidden;
             ListBooks.Visibility = Visibility.Visible;
+            USERs.Visibility = Visibility.Hidden;
             TextBlockWhereIAm.Text = "Library: Booked Books";
+        }
+
+        private void ButtonUsers_Click(object sender, RoutedEventArgs e)
+        {
+            Home.Visibility = Visibility.Hidden;
+            BOOKS.Visibility = Visibility.Hidden;
+            UISearch.Visibility = Visibility.Hidden;
+            ListBooks.Visibility = Visibility.Hidden;
+            USERs.Visibility = Visibility.Visible;
+            TextBlockWhereIAm.Text = "Library: Add or Modify Users";
         }
 
         public  void ToggleButtonEnabled()
@@ -171,5 +185,7 @@ namespace LibraryServer
         {
             ListBooks.UpdateDisplayAfterDelete();
         }
+
+       
     }
 }

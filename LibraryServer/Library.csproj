@@ -89,6 +89,9 @@
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="USERS.xaml.cs">
+      <DependentUpon>USERS.xaml</DependentUpon>
+    </Compile>
     <Page Include="BookCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +128,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Search.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="USERS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

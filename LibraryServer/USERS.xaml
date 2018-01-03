@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="LibraryServer.USERS"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryServer"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+             d:DesignHeight="574" d:DesignWidth="600">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <TextBox x:Name="TextBoxCNP" materialDesign:HintAssist.Hint="CNP:" ToolTip="Enter the CNP of the user"
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="200" HorizontalAlignment="Center" />
+            <TextBox x:Name="TextBoxBookName" materialDesign:HintAssist.Hint="Nume:" ToolTip="Enter the First name of the user"
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" />
+            <TextBox x:Name="TextBoxPreNume" materialDesign:HintAssist.Hint="Prenume" ToolTip="Enter the Last name of the user"
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" />
+            <TextBox x:Name="TextBoxProfilePic" materialDesign:HintAssist.Hint="Link to Profile Picture" ToolTip="Enter the link to profile picture (max 100 chars)"
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" MaxLength="100" />
+            <ComboBox materialDesign:HintAssist.Hint="Anul Absolvirii:"  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                x:Name="ComboBoxAn" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" />
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                <Button x:Name="ButtonSave" Click="ButtonSave_Click" Margin="0,0,10,0">Save</Button>
+                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="10,0,0,0">Cancel</Button>
+            </StackPanel>
+        </StackPanel>
+        <materialDesign:Snackbar x:Name="SnackbarDisplay" VerticalContentAlignment="Bottom" MaxWidth="600" />
+    </Grid>
+</UserControl>
