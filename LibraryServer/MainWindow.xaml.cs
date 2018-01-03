@@ -119,6 +119,7 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Hidden;
             ListBooks.Visibility = Visibility.Hidden;
+            TextBlockWhereIAm.Text = "Library: Home";
         }
 
         private void ButtonBooks_Click(object sender, RoutedEventArgs e)
@@ -127,6 +128,7 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Visible;
             UISearch.Visibility = Visibility.Hidden;
             ListBooks.Visibility = Visibility.Hidden;
+            TextBlockWhereIAm.Text = "Library: Add or Remove Books";
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -135,6 +137,7 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Visible;
             ListBooks.Visibility = Visibility.Hidden;
+            TextBlockWhereIAm.Text = "Library: Search Books";
         }
 
         private void ButtonList_Click(object sender, RoutedEventArgs e)
@@ -143,6 +146,7 @@ namespace LibraryServer
             BOOKS.Visibility = Visibility.Hidden;
             UISearch.Visibility = Visibility.Hidden;
             ListBooks.Visibility = Visibility.Visible;
+            TextBlockWhereIAm.Text = "Library: Booked Books";
         }
 
         public  void ToggleButtonEnabled()

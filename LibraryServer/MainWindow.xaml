@@ -80,7 +80,7 @@
                         </Button>
                     </StackPanel>
                     <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="False"/>
-                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">OOP Library</TextBlock>
+                    <TextBlock x:Name="TextBlockWhereIAm" VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">Library:     Home</TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
 
