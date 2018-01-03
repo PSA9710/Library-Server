@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +33,287 @@ namespace LibraryServer
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            if(ButtonSave.Content as string =="ADD")
+            {
+                AddUser();
+            }
+            else
+            {
+                UpdateUser();
+            }
+        }
 
+        //check if userprofesion changed to delete
+
+        private void UpdateUser()
+        {
+            try
+            {
+                Console.WriteLine("Updating User");
+                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+                {
+                    con.Open();
+                    String profesie = ComboBoxProfession.SelectionBoxItem.ToString();
+                    String sql = "update " + profesie + "s set Nume=@nume, Prenume=@prenume, Profilepic=@profilepic";
+                    if(profesie=="Student")
+                    {
+                        sql += ", An_absolvire=@anabs";
+                    }
+                    sql += " where CNP=" + TextBoxCNP.Text;
+                    Console.WriteLine("Da Sql update is " + sql);
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        cmd.Parameters.AddWithValue("@nume", TextBoxNume.Text);
+                        cmd.Parameters.AddWithValue("@prenume", TextBoxPreNume.Text);
+                        cmd.Parameters.AddWithValue("@profilepic", TextBoxProfilePic.Text);
+                        if(profesie=="Student")
+                        {
+                            cmd.Parameters.AddWithValue("@anabs", ComboBoxAn.SelectionBoxItem.ToString());
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        private void AddUser()
+        {
+            try
+            {
+                Console.WriteLine("Registering new user");
+                String profesia = ComboBoxProfession.SelectionBoxItem.ToString();
+                String sql = "insert into " + profesia;
+                sql += "s (CNP,Nume,Prenume,";
+                if(profesia=="Student")
+                {
+                    sql += "An_absolvire,";
+                }
+                sql += "Profilepic) values(@cnp,@nume,@prenume,";
+                if(profesia=="Student")
+                {
+                    sql += "@anabs,";
+                }
+                sql += "@profilepic)";
+                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cnp", TextBoxCNP.Text);
+                        cmd.Parameters.AddWithValue("@nume", TextBoxNume.Text);
+                        cmd.Parameters.AddWithValue("@prenume", TextBoxPreNume.Text);
+                        cmd.Parameters.AddWithValue("@profilepic", TextBoxProfilePic.Text);
+                        if (profesia == "Student")
+                        {
+                            cmd.Parameters.AddWithValue("@anabs", ComboBoxAn.SelectionBoxItem.ToString());
+                        }
+                        cmd.ExecuteNonQuery();
+                        Console.WriteLine("User Registered succesfull");
+                        var message = "User Registered Succesfull";
+                        SnackBarDisplay1(message, 2000);
+                        ResetFields();
+                    }
+                }
+            }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+
+        }
+
+        private void SnackBarDisplay1(string message, int timeSpan)
+        {
+            if (MainWindow.tickCount < 1 + timeSpan / 1000) return;
+            SnackbarDisplay.MessageQueue = new MaterialDesignThemes.Wpf.SnackbarMessageQueue(TimeSpan.FromMilliseconds(timeSpan));
+            SnackbarDisplay.MessageQueue.Enqueue(message);
+            MainWindow.tickCount = 0;
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
+            ResetAnABS();
+            ResetFields();
+        }
+
+        #region SnackBar
+        /// <summary>
+        /// Display various messages on Snackbar
+        /// </summary>
+        /// <param name="message">What message to be displayed</param>
+        /// <param name="timeSpan">the time to be displayed in milliseconds</param>
+        private void SnackBarDisplay(string message, int timeSpan)
+        {
+            if (MainWindow.tickCount < 1 + timeSpan / 1000) return;
+            SnackbarDisplay.MessageQueue = new MaterialDesignThemes.Wpf.SnackbarMessageQueue(TimeSpan.FromMilliseconds(timeSpan));
+            SnackbarDisplay.MessageQueue.Enqueue(message);
+            MainWindow.tickCount = 0;
+        }
+        #endregion
+
+        private void TextBoxCNP_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!(e.Key >= Key.D0 && e.Key <= Key.D9) && !(new Home().GetPressedKey(e)))
+            {
+                //TextBoxCNP.Text = "";
+                var message = "CNP must contain only numbers!";
+                SnackBarDisplay(message, 1000);
+                e.Handled = true;
+            }
+            if (e.Key == Key.Enter)
+            {
+                if (!CheckStringOnlyNumbers(TextBoxCNP.Text))
+                {
+                    TextBoxCNP.Text = "";
+                    var message = "CNP must contain only numbers!";
+                    SnackBarDisplay(message, 1000);
+                    e.Handled = true;
+                }
+                else
+                {
+                    if(TextBoxCNP.Text.Length<13)
+                    {
+                        Console.WriteLine("Attempted to querry a invalid CNP...Aborting");
+                        var message = "CNP should be no more or less than 13 digits. Are you sure the CNP is right?";
+                        SnackBarDisplay(message, 1000);
+                        e.Handled = true;
+                        return;
+                    }
+                    if(SQLSEARCH())
+                    {
+                        ButtonSave.Content = "Modify";
+                    }
+                    else
+                    {
+                        ButtonSave.Content = "ADD";
+                    }
+
+                 
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if the Text is made only out of numers
+        /// </summary>
+        /// <param name="text">A string must be passed for checking</param>
+        /// <returns>True for numbers, false if it contains other characters</returns>
+        private bool CheckStringOnlyNumbers(string text)
+        {
+            if (text == "") return false;
+            //if password contains characters reset password, and send error notification
+            if (text.All(char.IsDigit)) return true;
+            return false;
+        }
+
+
+        private bool SQLSEARCH()
+        {
+            Console.WriteLine("Searching for Students...");
+            try
+            {
+                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+                {
+                    con.Open();
+                    String sql = "Select * from Students where CNP=@cnp";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cnp", TextBoxCNP.Text);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if(reader.Read())
+                            {
+                                TextBoxNume.Text = reader["Nume"] as string;
+                                TextBoxPreNume.Text = reader["Prenume"] as string;
+                                TextBoxProfilePic.Text = reader["Profilepic"] as string;
+                                ComboBoxProfession.SelectedIndex = 0;
+                                ResetAnABS();
+                                Console.WriteLine("Student found");
+                                return true;
+                            }
+                            else
+                            {
+                                return SQLSEARCHLIBRARIAN();
+                            }
+                        }
+                    }
+                }
+            }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+
+
+            return false;
+        }
+        private bool SQLSEARCHLIBRARIAN()
+        {
+            Console.WriteLine("Student not found.... atempting finding Librarian");
+            try
+            {
+                using (SqlConnection con = new SqlConnection(new BOOKS().SQL_ConnectionString()))
+                {
+                    con.Open();
+                    String sql = "Select * from Librarians where CNP=@cnp";
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
+                    {
+                        cmd.Parameters.AddWithValue("@cnp", TextBoxCNP.Text);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                TextBoxNume.Text = reader["Nume"] as string;
+                                TextBoxPreNume.Text = reader["Prenume"] as string;
+                                TextBoxProfilePic.Text = reader["Profilepic"] as string;
+                                ComboBoxProfession.SelectedIndex = 1;
+                                ComboBoxAn.Height = 0;
+                                ComboBoxAn.Margin = new Thickness(0);
+                                Console.WriteLine("Librarian found");
+                                return true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Entry not found... it's a new user..");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+
+            return false;
+        }
+
+        private void ResetAnABS()
+        {
+            ComboBoxAn.Height = 40.5f;
+            ComboBoxAn.Margin = new Thickness(0, 10, 0, 0);
+        }
+
+
+        private void ResetFields()
+        {
+            TextBoxCNP.Text = "";
+            TextBoxNume.Text = "";
+            TextBoxPreNume.Text = "";
+            TextBoxProfilePic.Text = "";
+            ComboBoxAn.SelectedIndex = -1;
+            ComboBoxProfession.SelectedIndex = -1;
 
         }
+
+
     }
+
+
+    
 }

@@ -72,7 +72,7 @@
                 <local:BOOKS x:Name="BOOKS" Visibility="Hidden"/>
                 <local:Search x:Name="UISearch" Visibility="Hidden" />
                 <local:ListBooks x:Name="ListBooks" Visibility="Hidden"/>
-                <local:USERS x:Name="USERs" Visibility="Hidden"/>
+                <local:USERS x:Name="USERs" Visibility="Visible"/>
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>
