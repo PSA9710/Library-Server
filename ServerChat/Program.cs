@@ -31,7 +31,7 @@ namespace ServerChat
             _server.Start();
 
             _isRunning = true;
-            Process.Start(@"C:\Users\psa97\Desktop\oop\console_client\bin\Debug\console_client.exe");
+            //Process.Start(@"C:\Users\psa97\Desktop\oop\console_client\bin\Debug\console_client.exe");
             LoopClients();
         }
         //    Dictionary<int, TcpClient> userDictionary = new Dictionary<int, TcpClient>();
@@ -41,6 +41,7 @@ namespace ServerChat
             int i = -1;
             while (_isRunning)
             {
+                
                 // wait for client connection
                 TcpClient newClient = _server.AcceptTcpClient();
 
@@ -50,6 +51,7 @@ namespace ServerChat
                 Thread t = new Thread(() => HandleClient(newClient, i));
                 t.Start();
                 i++;
+                Console.WriteLine("New User Connected"+i);
 
             }
         }
@@ -95,11 +97,13 @@ namespace ServerChat
             foreach (var i in ListClients)
             {
                 //do not broadcast to itself
-                if (i == ListClients[index]) { return; Console.WriteLine("I was about to send back a message"); }
-
-                StreamWriter swr = new StreamWriter(i.GetStream(), Encoding.ASCII);
-                swr.WriteLine(data);
-                swr.Flush();
+                if (i == ListClients[index]) { Console.WriteLine("I was about to send back a message"); }
+                else
+                {
+                    StreamWriter swr = new StreamWriter(i.GetStream(), Encoding.ASCII);
+                    swr.WriteLine(data);
+                    swr.Flush();
+                }
             }
         }
     }
