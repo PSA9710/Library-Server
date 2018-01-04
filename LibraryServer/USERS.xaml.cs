@@ -209,6 +209,7 @@ namespace LibraryServer
         {
             ResetAnABS();
             ResetFields();
+            DisableUiElements();
         }
 
         #region SnackBar
@@ -235,7 +236,8 @@ namespace LibraryServer
                 SnackBarDisplay(message, 1000);
                 e.Handled = true;
             }
-            if (e.Key == Key.Enter||TextBoxCNP.Text.Length==13)
+            
+            if (e.Key == Key.Enter)
             {
                 if (TextBoxCNP.Text.Length != 13)
                 {
@@ -265,11 +267,13 @@ namespace LibraryServer
                     {
                         ButtonSave.Content = "Modify";
                         TextBoxCNP.IsEnabled = false;
+                        TextBoxNume.Focus();
                     }
                     else
                     {
                         ButtonSave.Content = "ADD";
                     }
+                    ReEnableUIElements();
 
                  
                 }
@@ -409,38 +413,27 @@ namespace LibraryServer
             }
         }
 
-        private void TextBoxCNP_TextChanged(object sender, TextChangedEventArgs e)
+        
+        private void ReEnableUIElements()
         {
-            if (TextBoxCNP.Text.Length == 13)
-            {
-                if (!CheckStringOnlyNumbers(TextBoxCNP.Text))
-                {
-                    TextBoxCNP.Text = "";
-                    var message = "CNP must contain only numbers!";
-                    SnackBarDisplay(message, 1000);
-                    e.Handled = true;
-                }
-                else
-                {
-                    if (TextBoxCNP.Text.Length < 13)
-                    {
-                        Console.WriteLine("Attempted to querry a invalid CNP...Aborting");
-                        var message = "CNP should be no more or less than 13 digits. Are you sure the CNP is right?";
-                        SnackBarDisplay(message, 1000);
-                        e.Handled = true;
-                        return;
-                    }
-                    if (SQLSEARCH())
-                    {
-                        ButtonSave.Content = "Modify";
-                        TextBoxCNP.IsEnabled = false;
-                    }
-                    else
-                    {
-                        ButtonSave.Content = "ADD";
-                    }
-                }
-            }
+           // TextBoxCNP.IsEnabled = true;
+            TextBoxPreNume.IsEnabled = true;
+            TextBoxNume.IsEnabled = true;
+            ComboBoxAn.IsEnabled = true;
+            ComboBoxProfession.IsEnabled = true;
+            TextBoxProfilePic.IsEnabled = true;
+
+        }
+
+        private void DisableUiElements()
+        {
+            TextBoxCNP.IsEnabled = true;
+            TextBoxPreNume.IsEnabled = false;
+            TextBoxNume.IsEnabled = false;
+            ComboBoxAn.IsEnabled = false;
+            ComboBoxProfession.IsEnabled = false;
+            TextBoxProfilePic.IsEnabled = false;
+
         }
     }
 
