@@ -267,7 +267,7 @@ namespace LibraryServer
                     {
                         ButtonSave.Content = "Modify";
                         TextBoxCNP.IsEnabled = false;
-                        TextBoxNume.Focus();
+                       // TextBoxNume.Focus();
                     }
                     else
                     {
@@ -434,6 +434,46 @@ namespace LibraryServer
             ComboBoxProfession.IsEnabled = false;
             TextBoxProfilePic.IsEnabled = false;
 
+        }
+
+        private void TextBoxCNP_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (TextBoxCNP.Text.Length != 13)
+            {
+                e.Handled = true;
+                return;
+            }
+            if (!CheckStringOnlyNumbers(TextBoxCNP.Text))
+            {
+                TextBoxCNP.Text = "";
+                var message = "CNP must contain only numbers!";
+                SnackBarDisplay(message, 1000);
+                e.Handled = true;
+            }
+            else
+            {
+                if (TextBoxCNP.Text.Length < 13)
+                {
+                    Console.WriteLine("Attempted to querry a invalid CNP...Aborting");
+                    var message = "CNP should be no more or less than 13 digits. Are you sure the CNP is right?";
+                    SnackBarDisplay(message, 1000);
+                    e.Handled = true;
+                    return;
+                }
+                if (SQLSEARCH())
+                {
+                    ButtonSave.Content = "Modify";
+                    TextBoxCNP.IsEnabled = false;
+                    TextBoxNume.Focus();
+                }
+                else
+                {
+                    ButtonSave.Content = "ADD";
+                }
+                ReEnableUIElements();
+
+
+            }
         }
     }
 

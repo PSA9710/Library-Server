@@ -16,7 +16,7 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
             <TextBox x:Name="TextBoxCNP" materialDesign:HintAssist.Hint="CNP:" ToolTip="Enter the CNP of the user"
-				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="200" HorizontalAlignment="Center" PreviewKeyDown="TextBoxCNP_PreviewKeyDown" MaxLength="13" />
+				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0" Width="200" HorizontalAlignment="Center" PreviewKeyDown="TextBoxCNP_PreviewKeyDown" MaxLength="13" PreviewKeyUp="TextBoxCNP_PreviewKeyUp" />
             <TextBox x:Name="TextBoxNume" materialDesign:HintAssist.Hint="Nume:" ToolTip="Enter the First name of the user"
 				 Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalContentAlignment="Stretch" VerticalAlignment="Top" VerticalContentAlignment="Center" Margin="0,10,0,0" Width="200" HorizontalAlignment="Center" IsEnabled="False" />
             <TextBox x:Name="TextBoxPreNume" materialDesign:HintAssist.Hint="Prenume" ToolTip="Enter the Last name of the user"
