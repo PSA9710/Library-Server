@@ -161,7 +161,7 @@ namespace LibraryServer
         private void DialogHostLogIn_DialogOpened(object sender, DialogOpenedEventArgs eventArgs)
         {
             TextBoxUserName.Text = TextBoxNameInput.Text;
-            //Keyboard.Focus(PasswordBoxUserPassword);
+            Keyboard.Focus(PasswordBoxUserPassword);
         }
 
         //When te DIalogHostLogIn is closing, execute the followiing code
