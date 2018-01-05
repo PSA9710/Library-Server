@@ -43,18 +43,10 @@ namespace LibraryServer
             Home.SetUser(AppUser);
             ListBooks.SetUser(AppUser);
             _client = new TcpClient();
-            try
-            {
-                _client.Connect("127.0.0.1", 5555);
-                Thread t = new Thread(() => HandleCommunication());
-                t.Start();
-            }
-            catch ( SocketException e)
-            {
-                MessageBox.Show("Can not connect to server");
-            }
+            _client.Connect("127.0.0.1", 5555);
 
-
+            Thread t = new Thread(() => HandleCommunication());
+            t.Start();
         }
 
 
@@ -88,7 +80,6 @@ namespace LibraryServer
         // If maximized==true, this buton closes the app
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
             App.Current.Shutdown();
         }
         //switch between maximized and normalized mode
@@ -101,14 +92,14 @@ namespace LibraryServer
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;  //change icon to fullscreenexit
 
 
-                BorderChat.Margin = new Thickness(7 + BorderChat.Margin.Left, 0, BorderChat.Margin.Left + 2, BorderChat.Margin.Bottom + 7);
+                BorderChat.Margin = new Thickness(7+BorderChat.Margin.Left, 0, BorderChat.Margin.Left+2,BorderChat.Margin.Bottom+ 7);
             }
             else if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
                 UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0);
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen; //change icon to fullscreen
-                BorderChat.Margin = new Thickness(BorderChat.Margin.Left - 7, 0, BorderChat.Margin.Left - 2, BorderChat.Margin.Bottom - 7);
+                BorderChat.Margin = new Thickness( BorderChat.Margin.Left-7, 0, BorderChat.Margin.Left - 2, BorderChat.Margin.Bottom - 7);
             }
         }
         // If the tilebar was clicked, allow drag across the screen
@@ -243,18 +234,8 @@ namespace LibraryServer
                 {
                     cb = new ChatBox(true, Message, Nume, ProfilePic);
                     cb.HorizontalAlignment = HorizontalAlignment.Left;
-                    cb.Margin = new Thickness(0, 0, 0, 3);
                     StackPanelChat.Children.Add(cb);
                     Console.WriteLine("Am spawnat");
-                    int i;
-                    if (BadgeChat.Badge.ToString() == "")
-                    { i = 0; }
-                    else
-                    {
-                        i = Convert.ToInt32(BadgeChat.Badge.ToString());
-                    }
-                    if (ToggleButtonMenu.IsChecked == false)
-                        BadgeChat.Badge = ++i;
                 }));
             }
         }
@@ -268,41 +249,15 @@ namespace LibraryServer
             string s = TextBoxChat.Text;
             TextBoxChat.Clear();
 
-            if (!_isConnected) { MessageBox.Show("not Connected to the Server"); return; }
+            if (!_isConnected) return;
 
             ChatBox cb = new ChatBox(false, s, "YOU", ProfilePic);
             cb.HorizontalAlignment = HorizontalAlignment.Right;
-            cb.Margin = new Thickness(0, 0, 0, 3);
             StackPanelChat.Children.Add(cb);
 
             _sWriter = new StreamWriter(_client.GetStream(), Encoding.ASCII);
             _sWriter.WriteLine(stringSend);
             _sWriter.Flush();
-        }
-
-        private void TextBoxChat_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                ButtonSendChat_Click(this, new RoutedEventArgs());
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (_isConnected)
-            {
-                _sWriter = new StreamWriter(_client.GetStream(), Encoding.ASCII);
-                _sWriter.WriteLine("#I am OuT#");
-                _sWriter.Flush();
-            }
-
-            _isConnected = false;
-
-            Environment.Exit(Environment.ExitCode);
-        }
-
-        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            BadgeChat.Badge = "";
         }
     }
 }

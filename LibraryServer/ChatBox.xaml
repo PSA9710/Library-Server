@@ -10,7 +10,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center"
              >
     <Grid MinWidth="50" MaxWidth="148" >
         <StackPanel x:Name="Content">
@@ -20,9 +20,7 @@
                 </materialDesign:Chip.Icon>
             </materialDesign:Chip>
             <materialDesign:Card Margin="0,-5,0,0" Padding="3,14,3,0">
-                <TextBlock Name="TextBlockChat" TextWrapping="WrapWithOverflow" 
-                          Margin="3"
-                           VerticalAlignment="Center" HorizontalAlignment="Left" >Ana are mere, </TextBlock>
+                <TextBlock Name="TextBlockChat" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Left" >Ana are mere, </TextBlock>
             </materialDesign:Card>
         </StackPanel>
     </Grid>

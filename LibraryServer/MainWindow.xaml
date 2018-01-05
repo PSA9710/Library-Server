@@ -12,7 +12,7 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 
-        Title="Library Server" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Closing="Window_Closing">
+        Title="Library Server" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None">
 
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton,Path=IsChecked}">
         <materialDesign:DrawerHost.LeftDrawerContent>
@@ -83,7 +83,7 @@
                                 <TextBox Grid.Column="0" 
                              materialDesign:HintAssist.Hint="Your message..." x:Name="TextBoxChat"
                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-                                         VerticalAlignment="Center" Margin="5,0,0,0" TextWrapping="WrapWithOverflow" Width="183" MaxHeight="50" PreviewKeyDown="TextBoxChat_PreviewKeyDown" />
+                                         VerticalAlignment="Center" Margin="5,0,0,0" TextWrapping="WrapWithOverflow" Width="183" MaxHeight="50" />
                                 <Button x:Name="ButtonSendChat" Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1"
                                 Height="24" Width="24" Click="ButtonSendChat_Click">
                                     <materialDesign:PackIcon Kind="Send" Opacity=".56" />
@@ -125,9 +125,7 @@
                             <materialDesign:PackIcon Kind="ExitToApp" Width="Auto" Height="Auto"/>
                         </Button>
                     </StackPanel>
-                    <materialDesign:Badged x:Name="BadgeChat" Badge="">
-                        <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="False" Checked="MenuToggleButton_Checked"/>
-                    </materialDesign:Badged>
+                    <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="True"/>
                     <TextBlock x:Name="TextBlockWhereIAm" VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">Library:     Home</TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>
