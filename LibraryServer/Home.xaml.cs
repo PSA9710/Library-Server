@@ -236,8 +236,11 @@ namespace LibraryServer
                     BUTTONCLOSEDIALOG.Command.Execute(null);
                     var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
                     target.MenuToggleButton.IsEnabled = true;
-                    if(!AppUser.isTeacher)
-                    target.ButtonBooks.Visibility = Visibility.Hidden;
+                    if (!AppUser.isTeacher)
+                    {
+                        target.ButtonBooks.Visibility = Visibility.Collapsed;
+                        target.ButtonUsers.Visibility = Visibility.Collapsed;
+                    }
                     e.Handled = true;
                 }
             }
