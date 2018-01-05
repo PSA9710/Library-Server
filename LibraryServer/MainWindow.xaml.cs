@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Threading;
+using System.IO;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace LibraryServer
 {
@@ -25,6 +28,12 @@ namespace LibraryServer
 
         static public User AppUser;
         static public int tickCount;
+        private TcpClient _client;
+
+        private StreamReader _sReader;
+        private StreamWriter _sWriter;
+
+        private Boolean _isConnected;
 
         public MainWindow()
         {
@@ -33,9 +42,14 @@ namespace LibraryServer
             AppUser = new User();
             Home.SetUser(AppUser);
             ListBooks.SetUser(AppUser);
+            _client = new TcpClient();
+            _client.Connect("127.0.0.1", 5555);
+
+            Thread t = new Thread(() => HandleCommunication());
+            t.Start();
         }
 
-        
+
 
         private void InitializeTimer()
         {
@@ -44,7 +58,7 @@ namespace LibraryServer
             ActualTime.Tick += TimerTick;   //Add TimerTick to fired events
             ActualTime.Start();
         }
-        
+
         private void TimerTick(object sender, EventArgs e)
         {
             tickCount++;
@@ -71,13 +85,13 @@ namespace LibraryServer
         //switch between maximized and normalized mode
         private void WindowStateButton_Click(object sender, RoutedEventArgs e)
         {
-             if(WindowState==WindowState.Normal)
+            if (WindowState == WindowState.Normal)
             {
                 WindowState = WindowState.Maximized;
-                UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0,0,8,10);
+                UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0, 0, 8, 10);
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;  //change icon to fullscreenexit
             }
-             else if(WindowState == WindowState.Maximized)
+            else if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
                 UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0);
@@ -93,7 +107,7 @@ namespace LibraryServer
         // If Switchmode has been checked , switch to dark mode
         private void SwitchModeButton_Checked(object sender, RoutedEventArgs e)
         {
-            if(SwitchModeButton.IsChecked==true)
+            if (SwitchModeButton.IsChecked == true)
             {
                 SwitchMode.Content = "Switch to Light Mode";
                 new PaletteHelper().SetLightDark(true); //function to switch between light ui and dark ui
@@ -112,7 +126,7 @@ namespace LibraryServer
             }
         }
 
- 
+
         private void ButtonHome_Click(object sender, RoutedEventArgs e)
         {
             Home.Visibility = Visibility.Visible;
@@ -163,7 +177,7 @@ namespace LibraryServer
             TextBlockWhereIAm.Text = "Library: Add or Modify Users";
         }
 
-        public  void ToggleButtonEnabled()
+        public void ToggleButtonEnabled()
         {
             MenuToggleButton.IsEnabled = !MenuToggleButton.IsEnabled;
         }
@@ -172,7 +186,7 @@ namespace LibraryServer
         {
             //MessageBox.Show(ISBN.ToString());
             AppUser.AddBooks(ISBN);
-         
+
         }
 
         public void RemoveBookFromUser(int ISBN)
@@ -180,12 +194,64 @@ namespace LibraryServer
             Console.WriteLine("Removing Book from User with ISBN=" + ISBN.ToString());
             AppUser.RemoveBooks(ISBN);
         }
-        
+
         public void ListBookUpdateAfterRemove()
         {
             ListBooks.UpdateDisplayAfterDelete();
         }
 
-       
+
+        public void HandleCommunication()
+        {
+            _sReader = new StreamReader(_client.GetStream(), Encoding.ASCII);
+            _isConnected = true;
+            String sData = null;
+            ChatBox cb;
+            //detele this if u on Winforms/wpf
+            Console.WriteLine(_sReader.ReadLine().ToString());
+
+            while (_isConnected)
+            {
+                // if you want to receive anything
+                String sDataIncomming = _sReader.ReadLine();
+                Console.WriteLine(sDataIncomming);
+                //  MethodInvoker m = new MethodInvoker(() => clientForm.textBox1.Text += ("Server: " + sDataIncomming + Environment.NewLine));
+                //Dispatcher.Invoke(new Action(() => chat.Text += sData));
+
+
+                //split string for easier work
+                String[] stuff = sDataIncomming.Split(new string[] { "#$#$" }, StringSplitOptions.None);
+                String Nume = stuff[0];
+                String ProfilePic = stuff[1];
+                String Message = stuff[2];
+
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    cb = new ChatBox(true, Message, Nume, ProfilePic);
+                    cb.HorizontalAlignment = HorizontalAlignment.Left;
+                    StackPanelChat.Children.Add(cb);
+                }));
+            }
+        }
+
+        private void ButtonSendChat_Click(object sender, RoutedEventArgs e)
+        {
+            String stringSend = null;
+            String AppUserName = AppUser.Name + " " + AppUser.LastName;
+            String ProfilePic = AppUser.ProfilePic;
+            stringSend = AppUserName + "#$#$" + ProfilePic + "#$#$" + TextBoxChat.Text;
+            string s = TextBoxChat.Text;
+            TextBoxChat.Clear();
+
+            if (!_isConnected) return;
+
+            ChatBox cb = new ChatBox(false, s, "YOU", ProfilePic);
+            cb.HorizontalAlignment = HorizontalAlignment.Right;
+            StackPanelChat.Children.Add(cb);
+
+            _sWriter = new StreamWriter(_client.GetStream(), Encoding.ASCII);
+            _sWriter.WriteLine(stringSend);
+            _sWriter.Flush();
+        }
     }
 }

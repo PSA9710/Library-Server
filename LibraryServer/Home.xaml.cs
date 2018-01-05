@@ -458,6 +458,7 @@ namespace LibraryServer
                             {
                                 if (reader["Profilepic"] != null)
                                 {
+                                    AppUser.SetProfilePic(reader.GetString(reader.GetOrdinal("ProfilePic")));
                                     Console.WriteLine("Changing profile picture");
                                     ProfilePicture.ImageSource = new BitmapImage(new Uri(reader.GetString(reader.GetOrdinal("Profilepic")), UriKind.Absolute));
                                     NoProfilePicture.Visibility = Visibility.Hidden;

@@ -82,6 +82,9 @@
     <Compile Include="BOOKS.xaml.cs">
       <DependentUpon>BOOKS.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChatBox.xaml.cs">
+      <DependentUpon>ChatBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListBooks.xaml.cs">
       <DependentUpon>ListBooks.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BOOKS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChatBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

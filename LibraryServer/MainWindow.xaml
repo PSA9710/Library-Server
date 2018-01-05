@@ -54,6 +54,7 @@
                             <Label>Add or Modify Users</Label>
                         </StackPanel>
                     </Button>
+
                 </StackPanel>
             </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
@@ -72,7 +73,33 @@
                 <local:BOOKS x:Name="BOOKS" Visibility="Hidden"/>
                 <local:Search x:Name="UISearch" Visibility="Hidden" />
                 <local:ListBooks x:Name="ListBooks" Visibility="Hidden"/>
-                <local:USERS x:Name="USERs" Visibility="Visible"/>
+                <local:USERS x:Name="USERs" Visibility="Hidden"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ScrollViewer x:Name="ScrollViewerChat" Width="200" Height="300">
+                        <StackPanel x:Name="StackPanelChat">
+                            <local:ChatBox HorizontalAlignment="Left"/>
+                            <local:ChatBox HorizontalAlignment="Right"/>
+                        </StackPanel>
+
+                    </ScrollViewer>
+                    <Border  MaxHeight="30" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth4" ToolTip="Enter your message" Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0" 
+                             materialDesign:HintAssist.Hint="Your message..." x:Name="TextBoxChat"
+                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" VerticalAlignment="Center" Margin="5,0,0,0" />
+                            <Button x:Name="ButtonSendChat" Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1"
+                                Height="24" Width="24" Click="ButtonSendChat_Click">
+                                <materialDesign:PackIcon Kind="Send" Opacity=".56" />
+                            </Button>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <!--<local:ChatBox Margin="-267,97,267,-97" />-->
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
                 <DockPanel>
