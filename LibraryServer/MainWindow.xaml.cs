@@ -45,12 +45,19 @@ namespace LibraryServer
 
             //this comment does nothing  
 
+            try
+            {
+                _client = new TcpClient();
+                _client.Connect("127.0.0.1", 5555);
 
-            _client = new TcpClient();
-            _client.Connect("127.0.0.1", 5555);
-
-            Thread t = new Thread(() => HandleCommunication());
-            t.Start();
+                Thread t = new Thread(() => HandleCommunication());
+                t.Start();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("No Server Detected");
+                _isConnected = false;
+            }
         }
 
 
