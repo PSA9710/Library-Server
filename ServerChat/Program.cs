@@ -83,7 +83,7 @@ namespace ServerChat
                 {
                     isClientConnected = false; //escape sequence
                     Console.WriteLine("User " + index.ToString() + " disconnected");
-                    ListClients.RemoveAt(index);
+                    ListClients.Remove(client);
                 }
                 else
                 {
@@ -94,6 +94,7 @@ namespace ServerChat
 
         public void Scrie(TcpClient index, String data)
         {
+            if(ListClients.Count!=0)
             foreach (var i in ListClients)
             {
                 //do not broadcast to itself

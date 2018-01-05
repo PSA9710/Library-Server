@@ -181,6 +181,22 @@ namespace LibraryServer
             TextBlockWhereIAm.Text = "Library: Add or Modify Users";
         }
 
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (_isConnected)
+            {
+                _sWriter = new StreamWriter(_client.GetStream(), Encoding.ASCII);
+                _sWriter.WriteLine("#I am OuT#");
+                _sWriter.Flush();
+            }
+
+            _isConnected = false;
+
+            Environment.Exit(Environment.ExitCode);
+        }
+
+
         public void ToggleButtonEnabled()
         {
             MenuToggleButton.IsEnabled = !MenuToggleButton.IsEnabled;
@@ -234,8 +250,14 @@ namespace LibraryServer
                 {
                     cb = new ChatBox(true, Message, Nume, ProfilePic);
                     cb.HorizontalAlignment = HorizontalAlignment.Left;
+                    cb.Margin = new Thickness(0, 0, 0, 3);
                     StackPanelChat.Children.Add(cb);
                     Console.WriteLine("Am spawnat");
+                    int i = 0;
+                    if (BadgeChat.Badge.ToString() != "")
+                        i =Convert.ToInt32( BadgeChat.Badge.ToString());
+                    if (ToggleButtonMenu.IsChecked == false)
+                        BadgeChat.Badge = ++i;
                 }));
             }
         }
@@ -249,15 +271,28 @@ namespace LibraryServer
             string s = TextBoxChat.Text;
             TextBoxChat.Clear();
 
-            if (!_isConnected) return;
+            if (!_isConnected) { MessageBox.Show("Not conected to server"); return; }
 
             ChatBox cb = new ChatBox(false, s, "YOU", ProfilePic);
             cb.HorizontalAlignment = HorizontalAlignment.Right;
+            cb.Margin = new Thickness(0, 0, 0, 3);
             StackPanelChat.Children.Add(cb);
 
             _sWriter = new StreamWriter(_client.GetStream(), Encoding.ASCII);
             _sWriter.WriteLine(stringSend);
             _sWriter.Flush();
         }
+        private void TextBoxChat_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                ButtonSendChat_Click(this, new RoutedEventArgs());
+        }
+
+        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            BadgeChat.Badge = "";
+        }
+
+       
     }
 }

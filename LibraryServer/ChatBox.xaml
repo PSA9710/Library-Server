@@ -20,7 +20,7 @@
                 </materialDesign:Chip.Icon>
             </materialDesign:Chip>
             <materialDesign:Card Margin="0,-5,0,0" Padding="3,14,3,0">
-                <TextBlock Name="TextBlockChat" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Left" >Ana are mere, </TextBlock>
+                <TextBlock Name="TextBlockChat" Margin="3" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Left" >Ana are mere, </TextBlock>
             </materialDesign:Card>
         </StackPanel>
     </Grid>
