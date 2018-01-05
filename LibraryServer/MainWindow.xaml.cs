@@ -252,6 +252,7 @@ namespace LibraryServer
                     cb.HorizontalAlignment = HorizontalAlignment.Left;
                     cb.Margin = new Thickness(0, 0, 0, 3);
                     StackPanelChat.Children.Add(cb);
+                    ScrollViewerChat.ScrollToEnd();
                     Console.WriteLine("Am spawnat");
                     int i = 0;
                     if (BadgeChat.Badge.ToString() != "")
