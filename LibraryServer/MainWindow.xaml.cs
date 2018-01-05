@@ -43,13 +43,13 @@ namespace LibraryServer
             Home.SetUser(AppUser);
             ListBooks.SetUser(AppUser);
             _client = new TcpClient();
-           // try
+            try
             {
                 _client.Connect("127.0.0.1", 5555);
                 Thread t = new Thread(() => HandleCommunication());
                 t.Start();
             }
-          //  catch (Exception e)
+            catch ( SocketException e)
             {
                 MessageBox.Show("Can not connect to server");
             }

@@ -17,7 +17,7 @@
         <materialDesign:DialogHost.DialogContent>
             <Grid >
                 <StackPanel >
-                    <StackPanel FocusManager.FocusedElement="{Binding ElementName=PasswordBoxUserPassword}" Margin="10,5,10,10">
+                    <StackPanel Name="StackPanelLogIn" FocusManager.FocusedElement="{Binding ElementName=PasswordBoxUserPassword}" Margin="10,5,10,10">
                         <TextBox x:Name="TextBoxUserName" materialDesign:HintAssist.Hint="Forname" Margin="10,5"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" PreviewKeyDown="TextBoxUserName_PreviewKeyDown" MaxLength="15"/>
                         <PasswordBox x:Name="PasswordBoxUserPassword" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
