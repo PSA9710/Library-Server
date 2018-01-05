@@ -14,7 +14,7 @@
 
         Title="Library Server" Height="720" Width="1280" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Closing="Window_Closing" WindowStyle="None">
 
-    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton,Path=IsChecked}">
+    <materialDesign:DrawerHost x:Name="Drawer" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton,Path=IsChecked}">
         <materialDesign:DrawerHost.LeftDrawerContent>
             <DockPanel MinWidth="212">
                 <ToggleButton x:Name="ToggleButtonMenu" Style="{StaticResource MaterialDesignHamburgerToggleButton}"

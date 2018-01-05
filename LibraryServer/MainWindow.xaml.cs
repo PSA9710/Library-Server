@@ -252,13 +252,15 @@ namespace LibraryServer
                     cb.HorizontalAlignment = HorizontalAlignment.Left;
                     cb.Margin = new Thickness(0, 0, 0, 3);
                     StackPanelChat.Children.Add(cb);
-                    ScrollViewerChat.ScrollToEnd();
+                    
                     Console.WriteLine("Am spawnat");
                     int i = 0;
                     if (BadgeChat.Badge.ToString() != "")
                         i =Convert.ToInt32( BadgeChat.Badge.ToString());
-                    if (ToggleButtonMenu.IsChecked == false)
+                    if (Drawer.IsLeftDrawerOpen == false)
                         BadgeChat.Badge = ++i;
+                    else
+                        ScrollViewerChat.ScrollToBottom();
                 }));
             }
         }
@@ -278,7 +280,7 @@ namespace LibraryServer
             cb.HorizontalAlignment = HorizontalAlignment.Right;
             cb.Margin = new Thickness(0, 0, 0, 3);
             StackPanelChat.Children.Add(cb);
-
+            ScrollViewerChat.ScrollToBottom();
             _sWriter = new StreamWriter(_client.GetStream(), Encoding.ASCII);
             _sWriter.WriteLine(stringSend);
             _sWriter.Flush();

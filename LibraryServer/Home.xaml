@@ -25,7 +25,6 @@
                         <Grid Margin="10,5,10,10">
                             <ComboBox x:Name="ComboBoxRank"  materialDesign:ComboBoxAssist.ClassicMode="false">
                                 <ComboBoxItem IsSelected="True">Student</ComboBoxItem>
-                                <ComboBoxItem>Elev</ComboBoxItem>
                                 <ComboBoxItem>Librarian</ComboBoxItem>
                             </ComboBox>
                         </Grid>
