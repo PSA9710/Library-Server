@@ -71,8 +71,8 @@ namespace ServerChat
             String sData = null;
 
             //delete this if you use WinForms/WPF
-            sWriter.WriteLine("Your ID is " + index.ToString() + " wtf");
-            sWriter.Flush();
+            //sWriter.WriteLine("Your ID is " + index.ToString() + " wtf");
+            //sWriter.Flush();
 
             while (isClientConnected)
             {
@@ -87,17 +87,17 @@ namespace ServerChat
                 }
                 else
                 {
-                    Scrie(index, sData);  //broadcast to other users
+                    Scrie(client, sData);  //broadcast to other users
                 }
             }
         }
 
-        public void Scrie(int index, String data)
+        public void Scrie(TcpClient index, String data)
         {
             foreach (var i in ListClients)
             {
                 //do not broadcast to itself
-                if (i == ListClients[index]) { Console.WriteLine("I was about to send back a message"); }
+                if (i ==index) { Console.WriteLine("I was about to send back a message"); }
                 else
                 {
                     StreamWriter swr = new StreamWriter(i.GetStream(), Encoding.ASCII);

@@ -22,40 +22,76 @@
                               IsEnabled="True"
                               HorizontalAlignment="Right" Margin="16"
                               IsChecked="{Binding ElementName=MenuToggleButton,Path=IsChecked,Mode=TwoWay}"/>
-                <StackPanel>
-                    <Button x:Name="ButtonHome"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonHome_Click" HorizontalContentAlignment="Left">
-                        <StackPanel Orientation="Horizontal" >
-                            <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center"/>
-                            <Label>Home</Label>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="ButtonList"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonList_Click" HorizontalContentAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="BookOpenPageVariant" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
-                            <Label>Booked Books</Label>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click" HorizontalContentAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Magnify" Foreground="{DynamicResource SwitchAccentPrimary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Label>Search</Label>
-                        </StackPanel>
-                    </Button>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Button x:Name="ButtonHome"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonHome_Click" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal" >
+                                <materialDesign:PackIcon Kind="Home" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center"/>
+                                <Label>Home</Label>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ButtonList"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonList_Click" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="BookOpenPageVariant" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
+                                <Label>Booked Books</Label>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ButtonSearch"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonSearch_Click" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Magnify" Foreground="{DynamicResource SwitchAccentPrimary}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Label>Search</Label>
+                            </StackPanel>
+                        </Button>
 
-                    <Button x:Name="ButtonBooks"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonBooks_Click" HorizontalContentAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="BookPlus" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
-                            <Label>Add or Modify Books</Label>
-                        </StackPanel>
-                    </Button>
-                    <Button x:Name="ButtonUsers"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonUsers_Click" HorizontalContentAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="AccountPlus" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
-                            <Label>Add or Modify Users</Label>
-                        </StackPanel>
-                    </Button>
+                        <Button x:Name="ButtonBooks"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonBooks_Click" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="BookPlus" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
+                                <Label>Add or Modify Books</Label>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ButtonUsers"  Style="{StaticResource MaterialDesignFlatButton}" Click="ButtonUsers_Click" HorizontalContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountPlus" VerticalAlignment="Center" Foreground="{DynamicResource SwitchAccentPrimary}" HorizontalAlignment="Center" />
+                                <Label>Add or Modify Users</Label>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <Label Margin="0 10 0 0" Grid.Row="1" x:Name="LabelName" FontSize="48" HorizontalAlignment="Center" Visibility="Visible" Foreground="{DynamicResource SwitchAccentPrimary}" Content="CHAT" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ScrollViewer Grid.Row="0" x:Name="ScrollViewerChat" Margin="3,0,3,3">
+                            <StackPanel x:Name="StackPanelChat">
 
-                </StackPanel>
+                            </StackPanel>
+
+                        </ScrollViewer>
+                        <Border x:Name="BorderChat" Grid.Row="1" VerticalAlignment="Bottom" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth4" ToolTip="Enter your message" Margin="3,10,3,3" Background="{DynamicResource PrimaryHueLightBrush}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox Grid.Column="0" 
+                             materialDesign:HintAssist.Hint="Your message..." x:Name="TextBoxChat"
+                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
+                                         VerticalAlignment="Center" Margin="5,0,0,0" TextWrapping="WrapWithOverflow" Width="183" MaxHeight="50" />
+                                <Button x:Name="ButtonSendChat" Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1"
+                                Height="24" Width="24" Click="ButtonSendChat_Click">
+                                    <materialDesign:PackIcon Kind="Send" Opacity=".56" />
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
             </DockPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -74,31 +110,7 @@
                 <local:Search x:Name="UISearch" Visibility="Hidden" />
                 <local:ListBooks x:Name="ListBooks" Visibility="Hidden"/>
                 <local:USERS x:Name="USERs" Visibility="Hidden"/>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ScrollViewer x:Name="ScrollViewerChat" Width="200" Height="300">
-                        <StackPanel x:Name="StackPanelChat">
-                            <local:ChatBox HorizontalAlignment="Left"/>
-                            <local:ChatBox HorizontalAlignment="Right"/>
-                        </StackPanel>
 
-                    </ScrollViewer>
-                    <Border  MaxHeight="30" CornerRadius="3" materialDesign:ShadowAssist.ShadowDepth="Depth4" ToolTip="Enter your message" Margin="0,10,0,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <TextBox Grid.Column="0" 
-                             materialDesign:HintAssist.Hint="Your message..." x:Name="TextBoxChat"
-                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" VerticalAlignment="Center" Margin="5,0,0,0" />
-                            <Button x:Name="ButtonSendChat" Style="{DynamicResource MaterialDesignToolButton}" Grid.Column="1"
-                                Height="24" Width="24" Click="ButtonSendChat_Click">
-                                <materialDesign:PackIcon Kind="Send" Opacity=".56" />
-                            </Button>
-                        </Grid>
-                    </Border>
-                </StackPanel>
                 <!--<local:ChatBox Margin="-267,97,267,-97" />-->
             </Grid>
             <materialDesign:ColorZone x:Name="TitleBar" Mode="PrimaryMid" Padding="16"  materialDesign:ShadowAssist.ShadowDepth="Depth3"  MouseDown="TitleBar_MouseDown">
@@ -113,7 +125,7 @@
                             <materialDesign:PackIcon Kind="ExitToApp" Width="Auto" Height="Auto"/>
                         </Button>
                     </StackPanel>
-                    <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="False"/>
+                    <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="True"/>
                     <TextBlock x:Name="TextBlockWhereIAm" VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">Library:     Home</TextBlock>
                 </DockPanel>
             </materialDesign:ColorZone>

@@ -90,12 +90,16 @@ namespace LibraryServer
                 WindowState = WindowState.Maximized;
                 UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0, 0, 8, 10);
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.FullscreenExit;  //change icon to fullscreenexit
+
+
+                BorderChat.Margin = new Thickness(7+BorderChat.Margin.Left, 0, BorderChat.Margin.Left+2,BorderChat.Margin.Bottom+ 7);
             }
             else if (WindowState == WindowState.Maximized)
             {
                 WindowState = WindowState.Normal;
                 UISearch.ScrollViewerDisplayCards.Margin = new Thickness(0);
                 WindowStateIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Fullscreen; //change icon to fullscreen
+                BorderChat.Margin = new Thickness( BorderChat.Margin.Left-7, 0, BorderChat.Margin.Left - 2, BorderChat.Margin.Bottom - 7);
             }
         }
         // If the tilebar was clicked, allow drag across the screen
@@ -208,7 +212,7 @@ namespace LibraryServer
             String sData = null;
             ChatBox cb;
             //detele this if u on Winforms/wpf
-            Console.WriteLine(_sReader.ReadLine().ToString());
+            //Console.WriteLine(_sReader.ReadLine().ToString());
 
             while (_isConnected)
             {
@@ -224,12 +228,14 @@ namespace LibraryServer
                 String Nume = stuff[0];
                 String ProfilePic = stuff[1];
                 String Message = stuff[2];
-
+                Console.WriteLine(Nume + "   " + Message);
+                Console.WriteLine("Spawning...");
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     cb = new ChatBox(true, Message, Nume, ProfilePic);
                     cb.HorizontalAlignment = HorizontalAlignment.Left;
                     StackPanelChat.Children.Add(cb);
+                    Console.WriteLine("Am spawnat");
                 }));
             }
         }
