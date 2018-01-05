@@ -42,6 +42,10 @@ namespace LibraryServer
             AppUser = new User();
             Home.SetUser(AppUser);
             ListBooks.SetUser(AppUser);
+
+            //this comment does nothing  
+
+
             _client = new TcpClient();
             _client.Connect("127.0.0.1", 5555);
 
