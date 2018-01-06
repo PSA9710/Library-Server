@@ -99,7 +99,7 @@ namespace LibraryServer
                                 //String Publisher = SQL_GetPublisher(reader.GetInt32(reader.GetOrdinal("publisher_ID")));
                                 String Description = reader["description"] as string;
                                 String NoCopies = reader.GetInt32(reader.GetOrdinal("no_of_copies")).ToString();
-                                if (Convert.ToInt32(NoCopies) > 0)
+                                if (Convert.ToInt32(NoCopies) >= 0)
                                 {
                                     bk = new Book(ISBN.ToString(), name, Author, null, NoCopies, Description);
                                     SpawnCard(bk);

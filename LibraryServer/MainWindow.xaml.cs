@@ -217,13 +217,15 @@ namespace LibraryServer
         {
             //MessageBox.Show(ISBN.ToString());
             AppUser.AddBooks(ISBN);
-
+            UISearch.WrapPanelDisplayCards.Children.Clear();
+            UISearch.Button_Click(new object(), new RoutedEventArgs());
         }
 
         public void RemoveBookFromUser(int ISBN)
         {
             Console.WriteLine("Removing Book from User with ISBN=" + ISBN.ToString());
             AppUser.RemoveBooks(ISBN);
+
         }
 
         public void ListBookUpdateAfterRemove()

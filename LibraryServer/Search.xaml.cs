@@ -26,7 +26,7 @@ namespace LibraryServer
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("Search Button was pressed");
             if (TextBoxSearch.Text == "")
@@ -146,6 +146,7 @@ namespace LibraryServer
                     e.Handled = true;
                     return;
                 }
+                WrapPanelDisplayCards.Children.Clear();
                 Button_Click(new object(), new RoutedEventArgs());
             }
         }
