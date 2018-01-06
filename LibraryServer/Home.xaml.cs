@@ -237,6 +237,9 @@ namespace LibraryServer
 
                     Console.WriteLine("Closing Dialog Host");
                     AcceptButtonIsPressed = true;
+
+                    var message1 = "Welcome,"+AppUser.Name+"!";
+                    SnackbarMessageDisplay(message1, 1000);
                     BUTTONCLOSEDIALOG.Command.Execute(null);
                     var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
                     target.MenuToggleButton.IsEnabled = true;
