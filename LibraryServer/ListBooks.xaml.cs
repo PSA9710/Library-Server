@@ -46,7 +46,10 @@ namespace LibraryServer
         public void UpdateDisplayAfterDelete()
         {
             WrapPanelDisplayCards.Children.Clear();
-            SQL_Querry(BuildBooksString());
+            if (AppUser.ReservedBooks.Count != 0)
+                SQL_Querry(BuildBooksString());
+            else
+                Console.WriteLine("User has no reserved books");
         }
 
         public void SetUser(User A)

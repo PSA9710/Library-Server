@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
+using System.Data.SqlClient;
 
 namespace LibraryServer
 {
@@ -223,8 +224,11 @@ namespace LibraryServer
 
         public void RemoveBookFromUser(int ISBN)
         {
+            try { 
             Console.WriteLine("Removing Book from User with ISBN=" + ISBN.ToString());
             AppUser.RemoveBooks(ISBN);
+            }
+            catch (SqlException e) { MessageBox.Show(e.ToString()); }
 
         }
 

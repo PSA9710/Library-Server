@@ -337,6 +337,7 @@ namespace LibraryServer
                 {
                     try
                     {
+                        Console.WriteLine("Updating....");
                         cmd.ExecuteNonQuery();
                     }
                     catch { MessageBox.Show("Error while updating"); }

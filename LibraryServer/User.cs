@@ -58,13 +58,15 @@ namespace LibraryServer
         {
             String books = null;
             Console.WriteLine("Removing book with ISBN:" + i.ToString() + " from list");
+            if (ReservedBooks.Count == 0) { Console.WriteLine("There is no book in order to create the update"); return; }
             ReservedBooks.Remove(i);
-            foreach (int book in ReservedBooks)
-            {
-                books += book + ",";
-            }
-            books = books.Remove(books.Length - 1);
-            Console.WriteLine("The String with registered books:" + books);
+            //foreach (int book in ReservedBooks)
+            //{
+            //    books += book + ",";
+            //}
+            //if(books!="")
+            //books = books.Remove(books.Length - 1);
+            //Console.WriteLine("The String with registered books:" + books);
 
             UpdateRegisteredUserBooks();
         }
@@ -73,18 +75,22 @@ namespace LibraryServer
         {
             String books = null;
             Console.WriteLine("Creating the string of books");
-            if (ReservedBooks.Count == 0) { Console.WriteLine("There is no book in order to create the update"); return; }
-            foreach (int book in ReservedBooks)
+            if (ReservedBooks.Count != 0)
             {
-                books += book + ",";
-            }
-            books = books.Remove(books.Length - 1);
-            Console.WriteLine("The String with registered books:" + books);
+                foreach (int book in ReservedBooks)
+                {
+                    books += book + ",";
+                }
 
-            if (isTeacher)
-                UpdateTeacherBooks(books);
-            else
-                UpdateStudentBooks(books);
+                books = books.Remove(books.Length - 1);
+            }
+            Console.WriteLine("The String with registered books:" + books);
+            
+                if (isTeacher)
+                    UpdateTeacherBooks(books);
+                else
+                    UpdateStudentBooks(books);
+          
          //   throw new NotImplementedException();
         }
 
@@ -101,7 +107,7 @@ namespace LibraryServer
                     String sql = "update Librarians Set BookList=@value where CNP=" + CNP;
                     using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
-                        cmd.Parameters.AddWithValue("@value", books);
+                        cmd.Parameters.AddWithValue("@value", (object)books ?? DBNull.Value);
                         cmd.ExecuteNonQuery();
                         Console.WriteLine("List updated succesfuly for the user");
                     }
@@ -127,7 +133,7 @@ namespace LibraryServer
                     String sql = "update Students Set BookList=@value where CNP=" + CNP;
                     using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
-                        cmd.Parameters.AddWithValue("@value", books);
+                        cmd.Parameters.AddWithValue("@value", (object)books?? DBNull.Value);
                         cmd.ExecuteNonQuery();
                         Console.WriteLine("List updated succesfuly for the user");
                     }
