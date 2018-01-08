@@ -126,7 +126,7 @@
                         </Button>
                     </StackPanel>
                     <materialDesign:Badged Name="BadgeChat" Badge="">
-                        <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="True" Checked="MenuToggleButton_Checked"/>
+                        <ToggleButton x:Name="MenuToggleButton" x:FieldModifier="public" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" IsChecked="False" IsEnabled="False" Checked="MenuToggleButton_Checked"/>
                     </materialDesign:Badged>
                     <TextBlock x:Name="TextBlockWhereIAm" VerticalAlignment="Center" Margin="16 0 0 0" FontSize="31" HorizontalAlignment="Center">Library:     Home</TextBlock>
                 </DockPanel>

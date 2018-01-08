@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Width="155" Height="205" Source="https://s.hswstatic.com/gif/2017-Chevrolet-Corvette-Grand-Sport.jpg" Stretch="Fill" Visibility="Visible"/>
+            <Image Grid.Column="0" Width="155" Height="205"  Stretch="Fill" Visibility="Visible"/>
             <materialDesign:PackIcon Kind="BookOpenPageVariant" Grid.Column="0" Width="145" Height="195" Margin="5" />
             <Grid Grid.Column="1" Width="200">
                     <StackPanel HorizontalAlignment="Right" Margin="10,5,10,0">
