@@ -309,6 +309,7 @@ namespace LibraryServer
                 if (aID == -9)
                     aID = SQL_GetAuthorID();
             }
+            else aID = SQL_GetAuthorID();
             if (TextBoxPublisher.Text != book.Publisher)
             {
                 Console.WriteLine("Publisher changed, attemtping to get new PublisherID");
@@ -316,7 +317,8 @@ namespace LibraryServer
                 if (pID == -9)
                     pID = SQL_GetPublisherID();
             }
-            if (aID == -1 || pID == -1) return;
+            else pID=SQL_GetPublisherID();
+            //if (aID == -1 || pID == -1) return;
 
             using (SqlConnection con = new SqlConnection(SQL_ConnectionString()))
             {
@@ -340,7 +342,7 @@ namespace LibraryServer
                         Console.WriteLine("Updating....");
                         cmd.ExecuteNonQuery();
                     }
-                    catch { MessageBox.Show("Error while updating"); }
+                    catch (Exception e){ MessageBox.Show(e.ToString()); }
                 }
 
             }
