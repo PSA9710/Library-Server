@@ -472,7 +472,9 @@ namespace LibraryServer
             else
             {
                 Console.WriteLine("Inserting new entry in the table with ISBN " + TextBoxISBN.Text);
-                
+                var message = "Data inserted";
+                SnackBarDisplay(message, 1000);
+                SQL_BOOK_insert();
             }
             ButtonCancel_Click(this, e);
         }
