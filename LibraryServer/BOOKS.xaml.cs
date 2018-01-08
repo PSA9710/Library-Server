@@ -457,15 +457,22 @@ namespace LibraryServer
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            if(TextBoxISBN.Text==""||TextBoxDescription.Text==""||TextBoxBookName.Text==""||TextBoxAuthor.Text==""||TextBoxPublisher.Text==""||ComboBoxCopies.SelectedIndex==-1)
+            {
+                var message = "All fields must be completede";
+                SnackBarDisplay(message, 1000);return;
+            }
             if (EntryFound)
             {
                 Console.WriteLine("Modifing entry in the table for ISBN " + TextBoxISBN.Text);
                 SQL_BOOK_modify();
+                var message = "Data modified";
+                SnackBarDisplay(message, 1000);
             }
             else
             {
                 Console.WriteLine("Inserting new entry in the table with ISBN " + TextBoxISBN.Text);
-                SQL_BOOK_insert();
+                
             }
             ButtonCancel_Click(this, e);
         }

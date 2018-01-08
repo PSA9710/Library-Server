@@ -13,7 +13,7 @@ namespace LibraryServer
         public String LastName { get; private set; }
         public int AnAbs { get; private set; }
         public List<int> ReservedBooks { get; private set; } = new List<int>();
-
+        public String ProfilePic{get;private set;}
         public void SetName(String name)
         {
             Name = name;
@@ -32,6 +32,10 @@ namespace LibraryServer
         public void SetAnAbs(int i)
         {
             AnAbs = i;
+        }
+        public void SetProfilePic(String s)
+        {
+            ProfilePic = s;
         }
 
         public abstract void AddBooks(String carti);

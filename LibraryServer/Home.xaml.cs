@@ -161,6 +161,10 @@ namespace LibraryServer
         private void DialogHostLogIn_DialogOpened(object sender, DialogOpenedEventArgs eventArgs)
         {
             TextBoxUserName.Text = TextBoxNameInput.Text;
+            Console.WriteLine("Login Opened");
+            Dispatcher.Invoke(new Action(() => { PasswordBoxUserPassword.Focus();
+                Console.WriteLine("Set focus on PasswordBox");
+            }));
             //Keyboard.Focus(PasswordBoxUserPassword);
         }
 
@@ -233,11 +237,23 @@ namespace LibraryServer
 
                     Console.WriteLine("Closing Dialog Host");
                     AcceptButtonIsPressed = true;
+
+                    var message1 = "Welcome,"+AppUser.Name+"!";
+                    SnackbarMessageDisplay(message1, 1000);
                     BUTTONCLOSEDIALOG.Command.Execute(null);
                     var target = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
                     target.MenuToggleButton.IsEnabled = true;
-                    if(!AppUser.isTeacher)
-                    target.ButtonBooks.Visibility = Visibility.Hidden;
+                    if (!AppUser.isTeacher)
+                    {
+                        target.ButtonBooks.Visibility = Visibility.Collapsed;
+                        target.ButtonUsers.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+
+                        target.ButtonBooks.Visibility = Visibility.Visible;
+                        target.ButtonUsers.Visibility = Visibility.Visible;
+                    }
                     e.Handled = true;
                 }
             }
@@ -458,6 +474,7 @@ namespace LibraryServer
                             {
                                 if (reader["Profilepic"] != null)
                                 {
+                                    AppUser.SetProfilePic(reader.GetString(reader.GetOrdinal("ProfilePic")));
                                     Console.WriteLine("Changing profile picture");
                                     ProfilePicture.ImageSource = new BitmapImage(new Uri(reader.GetString(reader.GetOrdinal("Profilepic")), UriKind.Absolute));
                                     NoProfilePicture.Visibility = Visibility.Hidden;

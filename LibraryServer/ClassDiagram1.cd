@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LibraryServer.App" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryServer.Book">
+    <Position X="1.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQQgQAAAiAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryServer.BookCard" BaseTypeListCollapsed="true">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAABAAQAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BookCard.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.BOOKS" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAEAgAAAAQAgAIRAgAAAAABAAQgIAABACACAA=</HashCode>
+      <FileName>BOOKS.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.ChatBox" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChatBox.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.Home" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MDAAIAAAIQAiABAIQhAEAAIAAAAAQAAAAkABAEAAABA=</HashCode>
+      <FileName>Home.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.ListBooks" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAIAAAAAEAAAACAAAAAAIAAEAAABAAAAABAAAACAA=</HashCode>
+      <FileName>ListBooks.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAIJAABBEAAAFAUAAIgRECAEgAEAAIAAQBCACA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.Person">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAASAAAAAEACAABAAAAAwAACAAAAAAAAAARAAAAAg=</HashCode>
+      <FileName>Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryServer.Search" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAAAAAEAAAAAAAAAAAEAAAAAABAAAAAAABAACAA=</HashCode>
+      <FileName>Search.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.User">
+    <Position X="2.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAwAAAAAAAIRAAAAAgQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryServer.USERS" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAAAAIAEAAEAAgCAQAAAQAAgQAABABggJAAAACAAQA=</HashCode>
+      <FileName>USERS.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LibraryServer.Properties.Resources" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryServer.Properties.Settings" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

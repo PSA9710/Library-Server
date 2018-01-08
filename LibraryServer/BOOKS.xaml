@@ -34,7 +34,7 @@
 				 materialDesign:HintAssist.Hint="Multiline text"
 				 Height="40" Margin="0,20" Text="Description of the Book"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="ButtonSave" Click="ButtonSave_Click" Margin="0,0,10,0">Save</Button>
+                <Button x:Name="ButtonSave" Click="ButtonSave_Click" Margin="0,0,10,0"></Button>
                 <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="10,0,0,0">Cancel</Button>
             </StackPanel>
         </StackPanel>
